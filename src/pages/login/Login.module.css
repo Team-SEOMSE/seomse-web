@@ -1,11 +1,12 @@
-div {
-  background-color: gray;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.login_section {
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 
-  p {
-    font-weight: 400;
-    color: yellow;
-  }
+    p {
+        font-weight: 400;
+        color: yellow;
+    }
 }

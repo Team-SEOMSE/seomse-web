@@ -1,0 +1,44 @@
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    height: 100%;
+    padding-bottom: 24px;
+    box-sizing: border-box;
+
+    .logo {
+        margin-top: 250px;
+        animation: fadeUp 1s ease-out forwards;
+    }
+
+    .corp {
+        margin-top: auto;
+        margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+        color: #d65862;
+        font-size: 12px;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 1.2s forwards;
+    }
+}
