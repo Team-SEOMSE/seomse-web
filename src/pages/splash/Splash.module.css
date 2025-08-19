@@ -27,18 +27,18 @@
     height: 100%;
     padding-bottom: 24px;
     box-sizing: border-box;
-}
 
-.logo {
-    margin-top: 250px;
-    animation: fadeUp 1s ease-out forwards;
-}
+    .logo {
+        margin-top: 250px;
+        animation: fadeUp 1s ease-out forwards;
+    }
 
-.corp {
-    margin-top: auto;
-    margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
-    color: #d65862;
-    font-size: 12px;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 1.2s forwards;
+    .corp {
+        margin-top: auto;
+        margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
+        color: #d65862;
+        font-size: 12px;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 1.2s forwards;
+    }
 }
