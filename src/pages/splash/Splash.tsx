@@ -1,8 +1,19 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/mainLogo.png";
-
 import styles from "./Splash.module.css";
 
 const Splash = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            navigate("/login");
+        }, 2200);
+
+        return () => clearTimeout(timer);
+    }, [navigate]);
+
     return (
         <div className={styles.screen}>
             <img className={styles.logo} src={Logo} alt="섬세 메인 로고" />
