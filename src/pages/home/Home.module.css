@@ -1,0 +1,7 @@
+.screen {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
+}
