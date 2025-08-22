@@ -1,9 +1,9 @@
 .screen {
-  display: flex;
-  flex-direction: column;
-  background: #ffffff;
-  height: 100vh;
-  padding-top: 60px;
-  padding-bottom: 100px;
-  box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    height: 100vh;
+    padding-top: 60px;
+    padding-bottom: 100px;
+    box-sizing: border-box;
 }
