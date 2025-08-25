@@ -1,12 +1,4 @@
-.login_section {
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
-
-.text {
-  font-weight: 400;
-  color: yellow;
+.login_page {
+    background: white;
+    height: 100dvh;
 }

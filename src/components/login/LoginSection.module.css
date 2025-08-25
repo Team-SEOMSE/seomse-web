@@ -1,0 +1,29 @@
+.login_section {
+    background: white;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 150px;
+}
+
+.logo {
+    margin: 0 auto;
+}
+
+.login_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.text_wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+    color: #787878;
+    font-size: 13px;
+    margin-top: 8px;
+}
