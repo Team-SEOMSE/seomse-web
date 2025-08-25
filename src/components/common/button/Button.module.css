@@ -1,0 +1,11 @@
+.common_button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.common_button > span {
+    display: inline-flex;
+    align-items: center;
+}
