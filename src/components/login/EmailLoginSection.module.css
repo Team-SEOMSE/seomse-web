@@ -2,23 +2,6 @@
     padding: 20px;
 }
 
-.header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.header svg {
-    position: absolute;
-    left: 0;
-}
-
-.title {
-    font-size: 16px;
-    margin: 0;
-}
-
 .guide_text {
     margin-top: 48px;
     margin-bottom: 36px;
