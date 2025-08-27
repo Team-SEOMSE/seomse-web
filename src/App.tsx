@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
+import EmailLogin from "./pages/emailLogin/EmailLogin";
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
 import MyPage from "./pages/myPage/MyPage";
+import Signup from "./pages/signup/Signup";
+import KakaoLogin from "./pages/socialLogin/KakaoLogin";
 import Splash from "./pages/splash/Splash";
 import Trend from "./pages/trend/Trend";
 // import MyPage from "./pages/myPage/MyPage";
@@ -17,7 +19,9 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Splash /> },
             { path: "splash", element: <Splash /> },
-            { path: "login", element: <Login /> },
+            { path: "kakao-login", element: <KakaoLogin /> },
+            { path: "email-login", element: <EmailLogin /> },
+            { path: "signup", element: <Signup /> },
             { path: "home", element: <Home /> },
             { path: "trend", element: <Trend /> },
             { path: "reservation", element: <Home /> },

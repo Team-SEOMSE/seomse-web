@@ -1,8 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/mainLogo.png";
 import { ReactComponent as KakaoIcon } from "../../assets/svg/kakao.svg";
-import Button from "../../components/common/button/Button";
 import type { ButtonElements, ButtonStyles } from "../../types/common/button";
-import styles from "./LoginSection.module.css";
+import Button from "../common/button/Button";
+import styles from "./KakaoLoginSection.module.css";
 
 const STYLE: ButtonStyles = {
     width: 300,
@@ -11,8 +12,9 @@ const STYLE: ButtonStyles = {
     backgroundColor: "#fee500",
 };
 
-const LoginSection = () => {
+const KakaoLoginSection = () => {
     const buttonElements: ButtonElements = { content: "카카오로 로그인" };
+    const navigate = useNavigate();
 
     return (
         <div className={styles.login_section}>
@@ -24,12 +26,23 @@ const LoginSection = () => {
                     icon={<KakaoIcon />}
                 />
                 <div className={styles.text_wrapper}>
-                    <p className={styles.text}>이메일로 로그인</p>|
-                    <p className={styles.text}> 이메일로 회원가입</p>
+                    <p
+                        className={styles.text}
+                        onClick={() => navigate("/email-login")}
+                    >
+                        이메일로 로그인
+                    </p>
+                    |
+                    <p
+                        className={styles.text}
+                        onClick={() => navigate("/signup")}
+                    >
+                        이메일로 회원가입
+                    </p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default LoginSection;
+export default KakaoLoginSection;
