@@ -1,8 +1,8 @@
 import { SyntheticEvent, useState } from "react";
-import { ReactComponent as Invisible } from "../../../assets/svg/invisible.svg";
-import { ReactComponent as Visible } from "../../../assets/svg/visible.svg";
+import { ReactComponent as Invisible } from "../../assets/svg/invisible.svg";
+import { ReactComponent as Visible } from "../../assets/svg/visible.svg";
 
-import styles from "./InputForm.module.scss";
+import styles from "./InputForm.module.css";
 
 interface Props {
     content: string;
