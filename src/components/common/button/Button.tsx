@@ -6,12 +6,18 @@ const Button = ({
     style,
     icon,
     iconPosition = "left",
+    disabled = false,
 }: ButtonProps & {
     icon?: React.ReactNode;
     iconPosition?: "left" | "right";
+    disabled?: boolean;
 }) => {
     const { content, handleClick } = elements;
-    const width = style?.width ? style.width : 400;
+    const width =
+        typeof style?.width === "number"
+            ? `${style.width}px`
+            : style?.width || "100%";
+
     const height = style?.height ? style.height : 50;
     const fontSize = style?.fontSize ? style.fontSize : 16;
     const fontWeight = style?.fontWeight ? style.fontWeight : 400;
@@ -23,8 +29,9 @@ const Button = ({
 
     return (
         <button
+            disabled={disabled}
             style={{
-                width: `${width}px`,
+                width: width,
                 height: `${height}px`,
                 fontSize: `${fontSize}px`,
                 fontWeight: `${fontWeight}`,
@@ -37,9 +44,11 @@ const Button = ({
                 alignItems: "center",
                 justifyContent: "center",
                 gap: "6px",
+                opacity: disabled ? 0.5 : 1,
+                cursor: disabled ? "not-allowed" : "pointer",
             }}
             className={styles.common_button}
-            onClick={handleClick}
+            onClick={disabled ? undefined : handleClick}
         >
             {icon && iconPosition === "left" && <span>{icon}</span>}
             <span>{content}</span>

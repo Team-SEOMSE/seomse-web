@@ -1,0 +1,47 @@
+.login_section {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.header svg {
+    position: absolute;
+    left: 0;
+}
+
+.title {
+    font-size: 16px;
+    margin: 0;
+}
+
+.guide_text {
+    margin-top: 48px;
+    margin-bottom: 36px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+}
+
+.signup_text {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    color: #787878;
+}
+
+.to_signup {
+    margin-left: 5px;
+    color: #ff3871;
+    text-decoration: underline;
+}

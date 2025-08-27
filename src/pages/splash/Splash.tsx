@@ -8,7 +8,7 @@ const Splash = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            navigate("/login");
+            navigate("/kakao-login");
         }, 2200);
 
         return () => clearTimeout(timer);
