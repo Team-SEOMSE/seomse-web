@@ -1,28 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as Prev } from "../../assets/svg/prevArrow.svg";
-import type { ButtonElements, ButtonStyles } from "../../types/common/button";
+import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import InputForm from "../login/InputForm";
 import styles from "./EmailLoginSection.module.css";
 
 const ACTIVE_STYLE: ButtonStyles = {
-    borderRadius: 112,
     color: "#ffffff",
+    fontWeight: 600,
 };
 
 const DISABLED_STYLE: ButtonStyles = {
-    borderRadius: 112,
     color: "#787878",
     backgroundColor: "#e6e6e6",
+    fontWeight: 600,
 };
 
 const EmailLoginSection = () => {
     const [id, setId] = useState<string>("");
     const [pw, setPw] = useState<string>("");
-    const buttonElements: ButtonElements = { content: "로그인" };
     const navigate = useNavigate();
-
+    const buttonElements = { content: "로그인" };
     const isActive = id.trim() !== "" && pw.trim() !== "";
 
     return (
