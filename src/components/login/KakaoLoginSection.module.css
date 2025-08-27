@@ -6,6 +6,8 @@
     justify-content: center;
     align-items: center;
     gap: 150px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -16,7 +18,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    width: 100%;
 }
 
 .text_wrapper {
@@ -26,4 +29,8 @@
     color: #787878;
     font-size: 13px;
     margin-top: 8px;
+}
+
+.text {
+    cursor: pointer;
 }

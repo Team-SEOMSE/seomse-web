@@ -25,7 +25,7 @@ const Button = ({
     const color = style?.color ? style.color : "#FFFFFF";
     const bgColor = style?.backgroundColor ? style.backgroundColor : "#ff3871";
     const border = style?.border ? style.border : "none";
-    const borderRadius = style?.borderRadius ? style.borderRadius : 0;
+    const borderRadius = style?.borderRadius ? style.borderRadius : 60;
 
     return (
         <button

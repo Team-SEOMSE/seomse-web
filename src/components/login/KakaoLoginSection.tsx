@@ -6,8 +6,6 @@ import Button from "../common/button/Button";
 import styles from "./KakaoLoginSection.module.css";
 
 const STYLE: ButtonStyles = {
-    width: 300,
-    borderRadius: 112,
     color: "#000000",
     backgroundColor: "#fee500",
 };

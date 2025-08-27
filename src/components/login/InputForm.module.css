@@ -1,7 +1,8 @@
-.login_form {
+.input_form {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 15px;
 }
 
 label {
@@ -9,13 +10,8 @@ label {
     font-size: 14px;
 }
 
-.input_wrapper {
+.input_row {
     position: relative;
-}
-
-.input_wrapper input:focus {
-    border: 1px solid #787878;
-    outline: none;
 }
 
 input {
@@ -25,23 +21,26 @@ input {
     padding: 12px 16px;
     border: 1px solid #e6e6e6;
     border-radius: 12px;
-    margin-bottom: 16px;
+}
+
+.input_row input:focus {
+    border: 1px solid #787878;
+    outline: none;
+}
+
+.input_error {
+    border: 1px solid #ff2b2b;
 }
 
 .eye_toggle {
     position: absolute;
     right: 10px;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     padding: 4px;
     cursor: pointer;
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
 }
 
 input::placeholder {
@@ -54,6 +53,5 @@ input::placeholder {
     color: #ff2b2b;
     font-size: 12px;
     font-weight: 500;
-    margin-top: 8px;
-    line-height: 0;
+    margin-left: 10px;
 }
