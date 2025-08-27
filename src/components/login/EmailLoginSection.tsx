@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as Prev } from "../../assets/svg/prevArrow.svg";
+import BackHeader from "../../layout/backHeader/BackHeader";
 import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import InputForm from "../login/InputForm";
@@ -26,11 +26,7 @@ const EmailLoginSection = () => {
 
     return (
         <div className={styles.login_section}>
-            <div className={styles.header}>
-                <Prev onClick={() => navigate(-1)} />
-                <h1 className={styles.title}>로그인</h1>
-            </div>
-
+            <BackHeader title="로그인" />
             <p className={styles.guide_text}>
                 Seomse에 로그인하고, <br />
                 간편하게 헤어 예약하세요!
