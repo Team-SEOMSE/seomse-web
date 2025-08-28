@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BackHeader from "../../layout/backHeader/BackHeader";
 import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
@@ -22,8 +23,14 @@ const SignupSection = () => {
     const [emailError, setEmailError] = useState<string | null>(null);
     const [pwError] = useState<string | null>(null);
     const [confirmError, setConfirmError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
-    const buttonElements = { content: "회원가입" };
+    const buttonElements = {
+        content: "회원가입",
+        handleClick: () => {
+            navigate("/user-details");
+        },
+    };
 
     const handleIdChange = (v: string) => {
         setId(v);

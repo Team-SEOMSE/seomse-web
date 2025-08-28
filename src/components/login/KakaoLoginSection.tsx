@@ -11,8 +11,14 @@ const STYLE: ButtonStyles = {
 };
 
 const KakaoLoginSection = () => {
-    const buttonElements: ButtonElements = { content: "카카오로 로그인" };
     const navigate = useNavigate();
+    const buttonElements: ButtonElements = {
+        content: "카카오로 로그인",
+        handleClick: () => {
+            // 카카오 로그인 개발 전 임시로 페이지 이동
+            navigate("/user-details");
+        },
+    };
 
     return (
         <div className={styles.login_section}>
