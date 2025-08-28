@@ -13,6 +13,16 @@
     margin-top: 36px;
 }
 
+.field_group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.dup_btn {
+    align-self: flex-end;
+}
+
 .button_wrapper {
     margin-top: auto;
     padding-top: 16px;
