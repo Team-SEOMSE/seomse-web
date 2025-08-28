@@ -1,0 +1,48 @@
+.group {
+    margin-bottom: 32px;
+}
+
+.label {
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #353535;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.option {
+    padding: 8px 16px;
+    border: 1px solid #cfcfcf;
+    color: #787878;
+    border-radius: 20px;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 0 0 auto;
+}
+
+.threeOrMore .option {
+    flex: 1 1 calc(33.333% - 8px);
+    max-width: calc(33.333% - 8px);
+}
+
+.selected {
+    border: 1px solid #ff3871;
+    color: #ff3871;
+    background: #fff2f5;
+}
+
+.option_icon {
+    margin-left: 6px;
+    display: flex;
+    align-items: center;
+}
