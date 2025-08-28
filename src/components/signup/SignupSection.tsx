@@ -13,6 +13,16 @@ const DISABLED_STYLE: ButtonStyles = {
     fontWeight: 600,
 };
 
+const DUPCHECK_STYLE: ButtonStyles = {
+    backgroundColor: "#353535",
+    fontSize: 14,
+    fontWeight: 500,
+    color: "#ffffff",
+    width: 120,
+    height: 40,
+    borderRadius: 12,
+};
+
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SignupSection = () => {
@@ -30,6 +40,10 @@ const SignupSection = () => {
         handleClick: () => {
             navigate("/user-details");
         },
+    };
+
+    const checkButtonElements = {
+        content: "중복 확인",
     };
 
     const handleIdChange = (v: string) => {
@@ -70,15 +84,24 @@ const SignupSection = () => {
             <BackHeader title="회원가입" />
             <form className={styles.form}>
                 <div className={styles.fields}>
-                    <InputForm
-                        content="아이디"
-                        setLoginState={handleIdChange}
-                        placeholder="seomse@gmail.com"
-                        defaultValue={id}
-                        required
-                        hasError={!!emailError}
-                        alertMessage={emailError ?? undefined}
-                    />
+                    <div className={styles.field_group}>
+                        <InputForm
+                            content="아이디"
+                            setLoginState={handleIdChange}
+                            placeholder="seomse@gmail.com"
+                            defaultValue={id}
+                            required
+                            hasError={!!emailError}
+                            alertMessage={emailError ?? undefined}
+                        />
+                        <div className={styles.dup_btn}>
+                            <Button
+                                elements={checkButtonElements}
+                                style={DUPCHECK_STYLE}
+                            />
+                        </div>
+                    </div>
+
                     <InputForm
                         content="이름"
                         setLoginState={setName}
