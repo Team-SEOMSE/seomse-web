@@ -1,34 +1,12 @@
 .swiper {
-    position: relative;
     width: 100%;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
-
-.progress {
-    position: absolute;
-    top: -4px;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 999px;
-    overflow: hidden;
-    transform: translateZ(0);
-}
-.progressInner {
-    height: 100%;
-    background: #e89fa6;
-    transform-origin: left center;
-    transform: scaleX(0);
-    transition: transform 160ms ease-out;
 }
 
 .track {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 50%;
-    gap: 15px;
+    grid-auto-columns: 100%;
+    gap: 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -39,60 +17,29 @@
 }
 
 .slide {
-    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     scroll-snap-align: start;
-    border-radius: 16px;
-    overflow: hidden;
 }
 
 .img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
 }
 
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, 0.45),
-        rgba(0, 0, 0, 0) 55%
-    );
+.imgCover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.caption {
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-    color: #fff;
-    line-height: 1.2;
-}
-.title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 2px;
-}
-.subtitle {
-    font-size: 13px;
-    opacity: 0.95;
+.imgContain {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
-.dots {
-    display: flex;
-    gap: 6px;
-    justify-content: center;
-    padding-top: 8px;
-}
-.dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    border: 0;
-    background: #d6d6d6;
-}
-.active {
-    background: #000000;
+.imgNone {
+    width: auto;
+    height: auto;
 }

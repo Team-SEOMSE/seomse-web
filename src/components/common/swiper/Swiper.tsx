@@ -18,18 +18,19 @@ export type SwiperHandle = {
     scrollTo: (index: number, opts?: ScrollToOptions) => void;
     getIndex: () => number;
     getTrackEl: () => HTMLDivElement | null;
-    getProgress: () => number; // 0 ~ 1
+    getProgress: () => number;
     prev: () => void;
     next: () => void;
 };
 
 type SwiperProps = {
     items: SwiperItem[];
-    aspect?: string;
-    showDots?: boolean;
-    showProgress?: boolean;
+    aspect?: "auto" | string;
+    fit?: "cover" | "contain" | "none";
     ariaLabel?: string;
     onIndexChange?: (i: number) => void;
+    loop?: boolean;
+    autoPlayMs?: number | null;
 };
 
 function clamp(n: number, min: number, max: number) {
@@ -39,19 +40,39 @@ function clamp(n: number, min: number, max: number) {
 const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
     {
         items,
-        aspect = "3 / 4",
-        showDots = true,
-        showProgress = true,
-        ariaLabel = "이미지 스와이퍼",
+        aspect = "auto",
+        fit = "contain",
+        ariaLabel = "swiper",
         onIndexChange,
+        loop = false,
+        autoPlayMs = null,
     },
     ref
 ) {
     const trackRef = useRef<HTMLDivElement>(null);
-    const [index, setIndex] = useState(0);
+
+    const withClones = loop && items.length > 1;
+    const renderItems = withClones
+        ? [items[items.length - 1], ...items, items[0]]
+        : items;
+
+    const [vIndex, setVIndex] = useState(withClones ? 1 : 0);
     const [progress, setProgress] = useState(0);
 
-    const computeIndex = () => {
+    const vIndexRef = useRef(vIndex);
+    useEffect(() => {
+        vIndexRef.current = vIndex;
+    }, [vIndex]);
+
+    const realFromVirtual = (vi: number) => {
+        if (!withClones) return vi;
+        if (vi === 0) return items.length - 1;
+        if (vi === renderItems.length - 1) return 0;
+        return vi - 1;
+    };
+    const virtualFromReal = (ri: number) => (withClones ? ri + 1 : ri);
+
+    const computeVIndex = () => {
         const el = trackRef.current;
         if (!el) return 0;
         return Math.round(el.scrollLeft / el.clientWidth);
@@ -64,19 +85,10 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
         return max > 0 ? el.scrollLeft / max : 0;
     };
 
-    const onScroll = () => {
-        const i = computeIndex();
-        setIndex((prev) => {
-            if (prev !== i) onIndexChange?.(i);
-            return i;
-        });
-        setProgress(computeProgress());
-    };
-
-    const goTo = (i: number, opts?: ScrollToOptions) => {
+    const snapToVirtual = (vi: number, opts?: ScrollToOptions) => {
         const el = trackRef.current;
         if (!el) return;
-        const safe = clamp(i, 0, items.length - 1);
+        const safe = clamp(vi, 0, renderItems.length - 1);
         el.scrollTo({
             left: el.clientWidth * safe,
             behavior: "smooth",
@@ -84,41 +96,61 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
         });
     };
 
+    const onScroll = () => {
+        const vi = computeVIndex();
+        if (vi !== vIndex) {
+            setVIndex(vi);
+            onIndexChange?.(realFromVirtual(vi));
+        }
+        setProgress(computeProgress());
+
+        if (withClones) {
+            const lastVi = renderItems.length - 1;
+            if (vi === 0) snapToVirtual(items.length, { behavior: "auto" });
+            else if (vi === lastVi) snapToVirtual(1, { behavior: "auto" });
+        }
+    };
+
     useEffect(() => {
-        const onResize = () => {
-            const el = trackRef.current;
-            if (!el) return;
-            el.scrollTo({ left: el.clientWidth * index });
-            setProgress(computeProgress());
-        };
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, [index]);
+        snapToVirtual(vIndex, { behavior: "auto" });
+        setProgress(computeProgress());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
+        if (!autoPlayMs || autoPlayMs <= 0) return;
+        const id = setInterval(() => {
+            const cur = vIndexRef.current;
+            if (withClones) {
+                snapToVirtual(cur + 1);
+            } else {
+                const real = realFromVirtual(cur);
+                const nextReal = (real + 1) % items.length;
+                const vi = virtualFromReal(nextReal);
+                snapToVirtual(vi, {
+                    behavior: nextReal === 0 ? "auto" : "smooth",
+                });
+            }
+        }, autoPlayMs);
+        return () => clearInterval(id);
+    }, [autoPlayMs, withClones, items.length]);
 
     useImperativeHandle(
         ref,
         () => ({
-            scrollTo: goTo,
-            getIndex: () => index,
+            scrollTo: (realIndex, opts) =>
+                snapToVirtual(virtualFromReal(realIndex), opts),
+            getIndex: () => realFromVirtual(vIndex),
             getTrackEl: () => trackRef.current,
             getProgress: () => progress,
-            prev: () => goTo(index - 1),
-            next: () => goTo(index + 1),
+            prev: () => snapToVirtual(vIndexRef.current - 1),
+            next: () => snapToVirtual(vIndexRef.current + 1),
         }),
-        [index, progress]
+        [progress, withClones]
     );
 
     return (
         <div className={styles.swiper}>
-            {showProgress && (
-                <div className={styles.progress} aria-hidden>
-                    <div
-                        className={styles.progressInner}
-                        style={{ transform: `scaleX(${progress || 0})` }}
-                    />
-                </div>
-            )}
-
             <div
                 ref={trackRef}
                 className={styles.track}
@@ -126,58 +158,34 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
                 aria-roledescription="carousel"
                 aria-label={ariaLabel}
             >
-                {items.map((it, i) => (
+                {renderItems.map((it, i) => (
                     <div
                         key={i}
                         className={styles.slide}
-                        aria-current={index === i}
-                        style={{ aspectRatio: aspect }}
+                        aria-current={vIndex === i}
+                        style={
+                            aspect === "auto"
+                                ? undefined
+                                : { aspectRatio: aspect }
+                        }
                     >
                         <img
-                            className={styles.img}
+                            className={`${styles.img} ${
+                                fit === "none"
+                                    ? styles.imgNone
+                                    : fit === "contain"
+                                    ? styles.imgContain
+                                    : styles.imgCover
+                            }`}
                             src={it.src}
                             alt={it.alt ?? it.title ?? `slide ${i + 1}`}
                         />
-                        <div className={styles.overlay} />
-                        {(it.title || it.subtitle) && (
-                            <div className={styles.caption}>
-                                {it.title && (
-                                    <div className={styles.title}>
-                                        {it.title}
-                                    </div>
-                                )}
-                                {it.subtitle && (
-                                    <div className={styles.subtitle}>
-                                        {it.subtitle}
-                                    </div>
-                                )}
-                            </div>
-                        )}
                     </div>
                 ))}
             </div>
-
-            {showDots && (
-                <div
-                    className={styles.dots}
-                    role="tablist"
-                    aria-label="슬라이드 이동"
-                >
-                    {items.map((_, i) => (
-                        <button
-                            key={i}
-                            role="tab"
-                            aria-selected={index === i}
-                            className={`${styles.dot} ${
-                                index === i ? styles.active : ""
-                            }`}
-                            onClick={() => goTo(i)}
-                        />
-                    ))}
-                </div>
-            )}
         </div>
     );
 });
 
 export default Swiper;
+export type { SwiperProps };

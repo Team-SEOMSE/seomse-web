@@ -1,7 +1,6 @@
-import Banner from "../../components/home/Banner";
-import Bubble from "../../components/home/Bubble";
-import NearbyShops from "../../components/home/NearbyShops";
-import PersonalRecommend from "../../components/home/PersonalRecommend";
+import EventBanner from "../../components/home/EventBanner";
+import HomeContent from "../../components/home/HomeContent";
+import Menu from "../../components/home/Menu";
 import Header from "../../layout/header/Header";
 import Navbar from "../../layout/navbar/Navbar";
 import styles from "./Home.module.css";
@@ -10,10 +9,12 @@ const Home = () => {
     return (
         <div className={styles.screen}>
             <Header />
-            <Banner />
-            <Bubble ageGroup="20대" userName="김섬세" />
-            <PersonalRecommend />
-            <NearbyShops />
+            <div className={styles.content}>
+                <EventBanner />
+                <Menu />
+                <div className={styles.devider}></div>
+                <HomeContent />
+            </div>
             <Navbar />
         </div>
     );
