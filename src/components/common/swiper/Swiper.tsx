@@ -1,5 +1,6 @@
 import {
     forwardRef,
+    ReactNode,
     useEffect,
     useImperativeHandle,
     useRef,
@@ -12,6 +13,8 @@ export type SwiperItem = {
     alt?: string;
     title?: string;
     subtitle?: string;
+    name?: string;
+    avatarSrc?: string;
 };
 
 export type SwiperHandle = {
@@ -31,6 +34,9 @@ type SwiperProps = {
     onIndexChange?: (i: number) => void;
     loop?: boolean;
     autoPlayMs?: number | null;
+    renderItem?: (item: SwiperItem, index: number) => ReactNode;
+    slideWidth?: string | number;
+    gap?: string | number;
 };
 
 function clamp(n: number, min: number, max: number) {
@@ -38,7 +44,10 @@ function clamp(n: number, min: number, max: number) {
 }
 
 const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
-    {
+    props,
+    ref
+) {
+    const {
         items,
         aspect = "auto",
         fit = "contain",
@@ -46,9 +55,11 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
         onIndexChange,
         loop = false,
         autoPlayMs = null,
-    },
-    ref
-) {
+        renderItem,
+        slideWidth,
+        gap,
+    } = props;
+
     const trackRef = useRef<HTMLDivElement>(null);
 
     const withClones = loop && items.length > 1;
@@ -114,8 +125,7 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
     useEffect(() => {
         snapToVirtual(vIndex, { behavior: "auto" });
         setProgress(computeProgress());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, []); // 초기화
 
     useEffect(() => {
         if (!autoPlayMs || autoPlayMs <= 0) return;
@@ -157,6 +167,20 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
                 onScroll={onScroll}
                 aria-roledescription="carousel"
                 aria-label={ariaLabel}
+                style={{
+                    gridAutoColumns:
+                        slideWidth == null
+                            ? "100%"
+                            : typeof slideWidth === "number"
+                            ? `${slideWidth}px`
+                            : slideWidth,
+                    gap:
+                        gap == null
+                            ? 0
+                            : typeof gap === "number"
+                            ? `${gap}px`
+                            : gap,
+                }}
             >
                 {renderItems.map((it, i) => (
                     <div
@@ -169,17 +193,21 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
                                 : { aspectRatio: aspect }
                         }
                     >
-                        <img
-                            className={`${styles.img} ${
-                                fit === "none"
-                                    ? styles.imgNone
-                                    : fit === "contain"
-                                    ? styles.imgContain
-                                    : styles.imgCover
-                            }`}
-                            src={it.src}
-                            alt={it.alt ?? it.title ?? `slide ${i + 1}`}
-                        />
+                        {renderItem ? (
+                            renderItem(it, i)
+                        ) : (
+                            <img
+                                className={`${styles.img} ${
+                                    fit === "none"
+                                        ? styles.imgNone
+                                        : fit === "contain"
+                                        ? styles.imgContain
+                                        : styles.imgCover
+                                }`}
+                                src={it.src}
+                                alt={it.alt ?? it.title ?? `slide ${i + 1}`}
+                            />
+                        )}
                     </div>
                 ))}
             </div>

@@ -23,10 +23,8 @@ const EventBanner = () => {
             const last = items.length - 1;
 
             if (idx >= last) {
-                // 마지막 → 첫 번째는 애니메이션 없이 순간 이동
                 h.scrollTo(0, { behavior: "auto" });
             } else {
-                // 나머지는 부드럽게
                 h.scrollTo(idx + 1);
             }
         };
