@@ -1,0 +1,9 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.card_wrapper {
+  margin-top: 24px;
+}
