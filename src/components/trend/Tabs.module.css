@@ -1,0 +1,33 @@
+.wrap {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 6px 20px;
+    scrollbar-width: none;
+}
+.wrap::-webkit-scrollbar {
+    display: none;
+}
+
+.chip {
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #8c8c8c;
+    border-radius: 9999px;
+    padding: 10px 14px;
+    font-size: 14px;
+    line-height: 1;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.chip:focus-visible {
+    outline: none;
+}
+
+.active {
+    border-color: #ff3871;
+    background: #ff3871;
+    color: #fff;
+}
