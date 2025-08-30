@@ -7,7 +7,7 @@ const KakaoCallback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { mutate, data, isPending, isError } = usePostApi(
+  const { mutate, data, isError } = usePostApi(
     "kakaoLogin",
     "/user/auth/oauth/login"
   );
