@@ -1,0 +1,26 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.text_box {
+  margin-top: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.complete {
+  color: #1a1a1a;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.desc {
+  color: #787878;
+  font-size: 16px;
+}

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/mainLogo.png";
+import Logo from "../../assets/svg/mainLogo.svg";
 import { ReactComponent as KakaoIcon } from "../../assets/svg/kakao.svg";
 import type { ButtonElements, ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
