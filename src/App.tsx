@@ -8,7 +8,7 @@ import Splash from "./pages/splash/Splash";
 import Trend from "./pages/trend/Trend";
 import UserDetails from "./pages/userDetails/UserDetails";
 import Reservation from "./pages/reservation/Reservation";
-import MyPageSection from "./components/myPage/myPageSection";
+import MyPageSection from "./components/myPage/MyPageSection";
 import MyPageShell from "./pages/myPage/MyPageShell";
 import MyPageWithNav from "./pages/myPage/MyPageWithNav";
 import ReviewWrite from "./components/myPage/ReviewWrite";
