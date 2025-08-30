@@ -1,4 +1,4 @@
-import MyPageSection from "../../components/myPage/myPageSection";
+import MyPageSection from "../../components/myPage/MyPageSection";
 import Navbar from "../../layout/navbar/Navbar";
 import styles from "./MyPage.module.css";
 
