@@ -1,5 +1,10 @@
-.swiper_section {
+section {
   padding: 0 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.swiper_section {
   display: flex;
   flex-direction: column;
   gap: 18px;
