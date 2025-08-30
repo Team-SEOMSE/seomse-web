@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Root from "./Root";
 import EmailLogin from "./pages/emailLogin/EmailLogin";
 import Home from "./pages/home/Home";
@@ -7,6 +8,7 @@ import KakaoLogin from "./pages/socialLogin/KakaoLogin";
 import Splash from "./pages/splash/Splash";
 import Trend from "./pages/trend/Trend";
 import UserDetails from "./pages/userDetails/UserDetails";
+import KakaoCallback from "./pages/socialLogin/KakaoCallback";
 import Reservation from "./pages/reservation/Reservation";
 import MyPageSection from "./components/myPage/MyPageSection";
 import MyPageShell from "./pages/myPage/MyPageShell";
@@ -14,6 +16,8 @@ import MyPageWithNav from "./pages/myPage/MyPageWithNav";
 import ReviewWrite from "./components/myPage/ReviewWrite";
 import ReviewDone from "./components/myPage/ReviewDone";
 import ReservationDetails from "./components/myPage/ReservationDetails";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -24,6 +28,7 @@ const router = createBrowserRouter([
       { index: true, element: <Splash /> },
       { path: "splash", element: <Splash /> },
       { path: "kakao-login", element: <KakaoLogin /> },
+      { path: "oauth/callback", element: <KakaoCallback /> },
       { path: "email-login", element: <EmailLogin /> },
       { path: "user-details", element: <UserDetails /> },
       { path: "signup", element: <Signup /> },
@@ -55,6 +60,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App = () => <RouterProvider router={router} />;
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
+);
 
 export default App;

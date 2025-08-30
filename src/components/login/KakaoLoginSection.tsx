@@ -4,6 +4,7 @@ import { ReactComponent as KakaoIcon } from "../../assets/svg/kakao.svg";
 import type { ButtonElements, ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import styles from "./KakaoLoginSection.module.css";
+import { KAKAO_CONFIG } from "../../config/KakaoConfig";
 
 const STYLE: ButtonStyles = {
   color: "#000000",
@@ -12,11 +13,11 @@ const STYLE: ButtonStyles = {
 
 const KakaoLoginSection = () => {
   const navigate = useNavigate();
+
   const buttonElements: ButtonElements = {
     content: "카카오로 로그인",
     handleClick: () => {
-      // 카카오 로그인 개발 전 임시로 페이지 이동
-      navigate("/user-details");
+      window.location.href = KAKAO_CONFIG.AUTH_URL;
     },
   };
 
