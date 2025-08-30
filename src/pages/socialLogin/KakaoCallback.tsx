@@ -48,10 +48,6 @@ const KakaoCallback = () => {
     }
   }, [isError, navigate]);
 
-  if (isPending) {
-    return <div>로그인 처리 중입니다...</div>;
-  }
-
   return null;
 };
 
