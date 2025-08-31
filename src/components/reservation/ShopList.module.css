@@ -1,0 +1,67 @@
+.section {
+  padding: 0 20px;
+}
+
+.swiper_box {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.shop_card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 8px;
+}
+
+.shop_media {
+  width: 100%;
+  aspect-ratio: 21 / 15;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+.shop_img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.shop_info_below {
+  padding: 0 4px;
+  line-height: 20px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+
+.sub {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #9e9e9e;
+}
+
+.best_tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: linear-gradient(90deg, #ffb7cc, #ff3871);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
