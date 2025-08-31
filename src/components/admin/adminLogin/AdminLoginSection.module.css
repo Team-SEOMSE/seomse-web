@@ -1,0 +1,67 @@
+.login_section {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.logo {
+  margin-bottom: 50px;
+}
+
+.form {
+  width: 100%;
+}
+
+.btn_wrapper {
+  margin-top: 60px;
+}
+
+.checkbox_group {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.checkbox_label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #787878;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox_label input {
+  display: none;
+}
+
+.custom_checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cfcfcf;
+  border-radius: 4px;
+  margin-right: 8px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.checkbox_label input:checked + .custom_checkbox {
+  background-color: #ff3871;
+  border-color: #ff3871;
+}
+
+.checkbox_label input:checked + .custom_checkbox::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}

@@ -1,6 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Root from "./Root";
+
+// --- User pages ---
 import EmailLogin from "./pages/emailLogin/EmailLogin";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup/Signup";
@@ -20,9 +22,17 @@ import DetailedFilter1 from "./pages/detailedFilter/DetailedFilter1";
 import DetailedFilter2 from "./pages/detailedFilter/DetailedFilter2";
 import DetailedRequest from "./pages/detailedFilter/DetailedRequest";
 
+// --- Admin pages ---
+import AdminLayout from "./pages/adminLayout/AdminLayout";
+import AdminLogin from "./pages/adminLogin/AdminLogin";
+import AdminReservationManagement from "./pages/adminReservationManagement/AdminReservationManagement";
+import ShopOwnerReview from "./pages/adminReviewManagement/ShopOwnerReview";
+import DesignerReview from "./pages/adminReviewManagement/DesignerReview";
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
+  // --- 일반 유저 전용 ---
   {
     path: "/",
     element: <Root />,
@@ -37,7 +47,6 @@ const router = createBrowserRouter([
       { path: "reservation-filter", element: <DetailedFilter1 /> },
       { path: "reservation-filter2", element: <DetailedFilter2 /> },
       { path: "reservation-request", element: <DetailedRequest /> },
-      { path: "user-details", element: <UserDetails /> },
       { path: "signup", element: <Signup /> },
       { path: "home", element: <Home /> },
       { path: "trend", element: <Trend /> },
@@ -63,6 +72,18 @@ const router = createBrowserRouter([
           },
         ],
       },
+    ],
+  },
+
+  // --- 어드민 전용 ---
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <AdminLogin /> },
+      { path: "reservations", element: <AdminReservationManagement /> },
+      { path: "reviews/shop-owner", element: <ShopOwnerReview /> },
+      { path: "reviews/designer", element: <DesignerReview /> },
     ],
   },
 ]);
