@@ -9,7 +9,7 @@
   z-index: 1000;
   transform: translateY(100%);
   transition: transform 0.3s ease-out;
-  height: 45%;
+  height: 340px;
   padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
 }
 
