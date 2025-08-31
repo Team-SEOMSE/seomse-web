@@ -9,4 +9,5 @@
 
 .content {
   overflow-y: auto;
+  padding-bottom: 60px;
 }
