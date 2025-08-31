@@ -2,14 +2,14 @@ import { useMutation } from "@tanstack/react-query";
 import { getCookie } from "../hooks/useCookie";
 import { API_URL } from "./URL";
 
-const usePostApi = (key: string, url: string) => {
+const usePostApi = (key: string, url: string, requireAuth: boolean = true) => {
   const COMPOUND_URL = `${API_URL}${url}`;
   const token = getCookie("accessToken");
 
   const postData = async (body: Record<string, unknown>) => {
     const headers: HeadersInit = {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
     const res = await fetch(COMPOUND_URL, {
