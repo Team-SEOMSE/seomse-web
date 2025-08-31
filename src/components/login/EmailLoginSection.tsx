@@ -96,7 +96,6 @@ const EmailLoginSection = () => {
           elements={buttonElements}
           style={isActive ? ACTIVE_STYLE : DISABLED_STYLE}
           disabled={!isActive}
-          type="submit"
         />
       </form>
 
