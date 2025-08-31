@@ -1,0 +1,97 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.sheet {
+  background: #fff;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px 20px 0 0;
+  padding: 24px 20px 40px;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+
+.close_button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9e9e9e;
+}
+
+.confirmed_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 10px;
+  line-height: 32px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #787878;
+}
+
+.highlight {
+  color: #ff3871;
+  font-weight: 500;
+}
+
+.confirmed_body {
+  display: flex;
+  justify-content: center;
+}
+
+.shop_card {
+  background: #f8f8f8;
+  padding: 16px 30px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.shop_card strong {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+
+.service {
+  font-size: 14px;
+  color: #9e9e9e;
+  margin-top: 8px;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    background: rgba(0, 0, 0, 0);
+  }
+  to {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
