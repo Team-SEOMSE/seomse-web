@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { API_URL } from "../api/URL";
 import { getCookie } from "../hooks/useCookie";
 
-const usePatchApi = (key: string, url: string) => {
+const usePatchApi = (key: string, url: string, requireAuth: boolean = true) => {
   const COMPOUND_URL = `${API_URL}${url}`;
   const token = getCookie("accessToken");
 
@@ -11,7 +11,7 @@ const usePatchApi = (key: string, url: string) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify(body),
     };

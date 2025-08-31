@@ -2,7 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { API_URL } from "./URL";
 import { getCookie } from "../hooks/useCookie";
 
-const useGetApi = (key: string, url: string, queryOptions?: object) => {
+const useGetApi = (
+  key: string,
+  url: string,
+  requireAuth: boolean = true,
+  queryOptions?: object
+) => {
   const COMPOUND_URL = `${API_URL}${url}`;
 
   const token = getCookie("accessToken");
@@ -11,7 +16,7 @@ const useGetApi = (key: string, url: string, queryOptions?: object) => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
     },
     credentials: "include",
   };

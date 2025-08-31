@@ -16,7 +16,16 @@ export const setCookie = (
   value: string,
   options?: CookieOptions
 ) => {
-  return cookies.set(name, value, { ...options });
+  const expires = new Date();
+  expires.setDate(expires.getDate() + 1);
+
+  return cookies.set(name, value, {
+    path: "/",
+    secure: true,
+    sameSite: "strict",
+    ...options,
+    expires,
+  });
 };
 
 export const getCookie = (name: string) => {

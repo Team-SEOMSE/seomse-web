@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import usePostApi from "../../api/usePostApi";
 import { setCookie } from "../../hooks/useCookie";
+import { AUTH_PATH } from "../../api/URL";
 
 const KakaoCallback = () => {
   const [searchParams] = useSearchParams();
@@ -9,7 +10,7 @@ const KakaoCallback = () => {
 
   const { mutate, data, isError } = usePostApi(
     "kakaoLogin",
-    "/user/auth/oauth/login"
+    AUTH_PATH + "/oauth/login"
   );
 
   useEffect(() => {
@@ -28,15 +29,7 @@ const KakaoCallback = () => {
   useEffect(() => {
     if (data) {
       const { accessToken } = data.data;
-      const expires = new Date();
-      expires.setDate(expires.getDate() + 1);
-
-      setCookie("accessToken", accessToken, {
-        path: "/",
-        expires,
-        secure: true,
-        sameSite: "strict",
-      });
+      setCookie("accessToken", accessToken);
 
       navigate("/home");
     }
