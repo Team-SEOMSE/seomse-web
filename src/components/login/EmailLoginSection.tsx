@@ -53,12 +53,8 @@ const EmailLoginSection = () => {
             navigate("/home");
           }
         },
-        onError: (error) => {
-          if (error instanceof Error) {
-            setErrorMessage(error.message);
-          } else {
-            setErrorMessage("로그인에 실패했습니다. 다시 시도해주세요.");
-          }
+        onError: () => {
+          alert("아이디 또는 비밀번호를 확인해주세요.");
         },
       }
     );
@@ -89,8 +85,6 @@ const EmailLoginSection = () => {
             hasError={!!errorMessage}
           />
         </div>
-
-        {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
 
         <Button
           elements={buttonElements}

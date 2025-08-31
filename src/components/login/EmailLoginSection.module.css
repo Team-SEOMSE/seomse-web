@@ -28,11 +28,3 @@
   color: #ff3871;
   text-decoration: underline;
 }
-
-.error_message {
-  color: #ff2b2b;
-  font-size: 14px;
-  text-align: center;
-  margin: 8px 0;
-  font-weight: 500;
-}
