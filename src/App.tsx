@@ -16,6 +16,9 @@ import MyPageWithNav from "./pages/myPage/MyPageWithNav";
 import ReviewWrite from "./components/myPage/ReviewWrite";
 import ReviewDone from "./components/myPage/ReviewDone";
 import ReservationDetails from "./components/myPage/ReservationDetails";
+import DetailedFilter1 from "./pages/detailedFilter/DetailedFilter1";
+import DetailedFilter2 from "./pages/detailedFilter/DetailedFilter2";
+import DetailedRequest from "./pages/detailedFilter/DetailedRequest";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,10 @@ const router = createBrowserRouter([
       { path: "kakao-login", element: <KakaoLogin /> },
       { path: "oauth/callback", element: <KakaoCallback /> },
       { path: "email-login", element: <EmailLogin /> },
+      { path: "user-details", element: <UserDetails /> },
+      { path: "reservation-filter", element: <DetailedFilter1 /> },
+      { path: "reservation-filter2", element: <DetailedFilter2 /> },
+      { path: "reservation-request", element: <DetailedRequest /> },
       { path: "user-details", element: <UserDetails /> },
       { path: "signup", element: <Signup /> },
       { path: "home", element: <Home /> },

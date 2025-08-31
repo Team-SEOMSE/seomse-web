@@ -1,0 +1,35 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  padding: 20px;
+  background: white;
+  box-sizing: border-box;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.title {
+  font-size: 24px;
+  color: #1a1a1a;
+  font-weight: 700;
+  line-height: 32px;
+  margin-bottom: 12px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #787878;
+  line-height: 20px;
+  margin-bottom: 40px;
+}
+
+.button_wrapper {
+  margin-top: auto;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}

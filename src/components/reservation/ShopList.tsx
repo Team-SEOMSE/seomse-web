@@ -5,6 +5,7 @@ import Tabs from "../trend/Tabs";
 import shopImg from "../../assets/images/shopImg.png";
 import { ReactComponent as Tag } from "../../assets/svg/tagIcon.svg";
 import BottomSheet from "./BottomSheet";
+import ReservationConfirmedSheet from "./ReservationConfirmedSheet";
 import styles from "./ShopList.module.css";
 
 interface ShopItem extends SwiperItem {
@@ -13,12 +14,14 @@ interface ShopItem extends SwiperItem {
   time?: string;
   shopInfo?: string[];
   details?: string;
+  serviceName?: string;
 }
 
 const shopBestItems: ShopItem[] = [
   {
     src: shopImg,
     title: "준오헤어샵 압구정점",
+    serviceName: "볼륨매직",
     subtitle: "압구정 2번 출구에서 도보 200m 직진...",
     isBest: true,
     isOpen: true,
@@ -32,7 +35,8 @@ const shopBestItems: ShopItem[] = [
   {
     src: shopImg,
     title: "유이프",
-    subtitle: "자체 볼륩 브러시 개발",
+    serviceName: "모카무스 염색",
+    subtitle: "자체 볼륨 브러시 개발",
     isBest: false,
     isOpen: false,
     time: "11:00 - 21:00",
@@ -42,14 +46,24 @@ const shopBestItems: ShopItem[] = [
 ];
 
 const ShopList = () => {
-  const [selectedShop, setSelectedShop] = useState<SwiperItem | null>(null);
+  const [selectedShop, setSelectedShop] = useState<ShopItem | null>(null);
+  const [confirmedShop, setConfirmedShop] = useState<ShopItem | null>(null);
 
-  const openBottomSheet = (shop: SwiperItem) => {
+  const openBottomSheet = (shop: ShopItem) => {
     setSelectedShop(shop);
   };
 
   const closeBottomSheet = () => {
     setSelectedShop(null);
+  };
+
+  const handleSimpleReservation = (shop: ShopItem) => {
+    setSelectedShop(null); // 기존 시트 닫기
+    setConfirmedShop(shop); // 예약 확정 시트 열기
+  };
+
+  const closeConfirmedSheet = () => {
+    setConfirmedShop(null);
   };
 
   return (
@@ -93,6 +107,7 @@ const ShopList = () => {
             </div>
           )}
         />
+
         <Swiper
           items={shopBestItems}
           aspect="auto"
@@ -115,15 +130,26 @@ const ShopList = () => {
         />
       </div>
 
+      {/* 매장 상세 BottomSheet */}
       {selectedShop && (
         <BottomSheet
           title={selectedShop.title || ""}
-          isBest={(selectedShop as ShopItem).isBest}
-          isOpen={(selectedShop as ShopItem).isOpen}
-          time={(selectedShop as ShopItem).time}
-          shopInfo={(selectedShop as ShopItem).shopInfo}
-          details={(selectedShop as ShopItem).details}
+          isBest={selectedShop.isBest}
+          isOpen={selectedShop.isOpen}
+          time={selectedShop.time}
+          shopInfo={selectedShop.shopInfo}
+          details={selectedShop.details}
           onClose={closeBottomSheet}
+          onSimpleReservation={() => handleSimpleReservation(selectedShop)}
+        />
+      )}
+
+      {/* 예약 확정 시트 */}
+      {confirmedShop && (
+        <ReservationConfirmedSheet
+          shopName={confirmedShop.title || ""}
+          serviceName={confirmedShop.serviceName || ""}
+          onClose={closeConfirmedSheet}
         />
       )}
     </div>

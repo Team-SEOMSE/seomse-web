@@ -13,6 +13,7 @@ interface BottomSheetProps {
   shopInfo?: string[];
   details?: string;
   onClose: () => void;
+  onSimpleReservation: () => void; // ✅ 추가
 }
 
 const STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 500 };
@@ -24,12 +25,17 @@ const BottomSheet = ({
   time,
   shopInfo,
   onClose,
+  onSimpleReservation,
 }: BottomSheetProps) => {
   const navigate = useNavigate();
+
+  // 섬세한 예약하기 → 필터 페이지
   const buttonElements = {
     content: "섬세한 예약하기",
     handleClick: () => {
-      navigate("/user-details");
+      navigate("/reservation-filter", {
+        state: { shopName: title },
+      });
     },
   };
 
@@ -74,7 +80,12 @@ const BottomSheet = ({
 
         <div className={styles.button_group}>
           <Button elements={buttonElements} style={STYLE} />
-          <p className={styles.simple_book_button}>그냥 예약하기</p>
+          <p
+            className={styles.simple_book_button}
+            onClick={onSimpleReservation}
+          >
+            그냥 예약하기
+          </p>
         </div>
       </div>
     </div>
