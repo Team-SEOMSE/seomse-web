@@ -43,14 +43,12 @@ const DetailedFilter2 = () => {
       <SelectGroup
         label="길이"
         options={["숏컷", "짧은 단발", "미디움", "장발", "가슴아래"]}
-        multiple={true}
         onChange={(value) => setGender(value as string)}
       />
       <SelectGroup
         label="시술 여부"
         desc="* 최근 6개월-1년 이내에 염색, 탈색, 펌 등의 시술 이력이 있다면 선택해주세요."
         options={["파마", "매직", "염색", "탈색", "블랙염색", "없음"]}
-        multiple={true}
         onChange={(value) => setAge(value as string)}
       />
       <div className={styles.button_wrapper}>
