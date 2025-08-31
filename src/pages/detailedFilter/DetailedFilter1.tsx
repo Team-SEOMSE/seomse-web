@@ -45,13 +45,11 @@ const DetailedFilter1 = () => {
       <SelectGroup
         label="두피 타입"
         options={["지성", "복합성", "건성", "민감성", " 잘 모르겠음"]}
-        multiple={true}
         onChange={(value) => setGender(value as string)}
       />
       <SelectGroup
         label="모발 유형"
         options={["손상모", "건강모", "직모", "곱슬", "반곱슬"]}
-        multiple={true}
         onChange={(value) => setAge(value as string)}
       />
       <div className={styles.button_wrapper}>
