@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import BackHeader from "../../layout/backHeader/BackHeader";
 import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
@@ -25,6 +25,14 @@ const EmailLoginSection = () => {
   const [pw, setPw] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const emailFromUrl = searchParams.get("email");
+    if (emailFromUrl) {
+      setId(emailFromUrl);
+    }
+  }, [searchParams]);
 
   const { mutate: login } = usePostApi("login", AUTH_PATH + "/login", false);
 
