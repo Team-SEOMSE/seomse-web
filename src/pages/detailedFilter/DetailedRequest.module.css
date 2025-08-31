@@ -1,0 +1,89 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: white;
+  gap: 12px;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.title {
+  margin: 4px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.desc {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #787878;
+}
+
+.editor_box {
+  position: relative;
+  background: #fff;
+  border: 1px solid #eceef1;
+  border-radius: 20px;
+  padding: 16px;
+  min-height: 200px;
+  margin-top: 40px;
+  background: #f8f8f8;
+}
+
+.editor {
+  min-height: 160px;
+  outline: none;
+  font-size: 14px;
+}
+
+.inline_img {
+  max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  margin: 8px 0;
+  cursor: zoom-in;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 16px;
+  pointer-events: none;
+}
+
+.hint_img {
+  width: 56px;
+  height: 56px;
+  opacity: 0.9;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.hint_text {
+  margin: 0;
+  font-size: 14px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.file_input {
+  display: none;
+}
+
+.button_wrapper {
+  margin-top: auto;
+  padding-top: 16px;
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+}
