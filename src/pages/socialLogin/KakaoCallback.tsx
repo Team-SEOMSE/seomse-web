@@ -10,7 +10,8 @@ const KakaoCallback = () => {
 
   const { mutate, data, isError } = usePostApi(
     "kakaoLogin",
-    AUTH_PATH + "/oauth/login"
+    AUTH_PATH + "/oauth/login",
+    false
   );
 
   useEffect(() => {
