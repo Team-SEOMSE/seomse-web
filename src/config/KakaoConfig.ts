@@ -9,7 +9,7 @@ export const KAKAO_CONFIG: KakaoConfig = {
   REDIRECT_URI: import.meta.env.VITE_KAKAO_REDIRECT_URI ?? "",
 
   get AUTH_URL() {
-    return `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${this.CLIENT_ID}&redirect_uri=${this.REDIRECT_URI}`;
+    return `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${this.CLIENT_ID}&redirect_uri=${this.REDIRECT_URI}&response_type=code&scope=profile_nickname`;
   },
 };
 
