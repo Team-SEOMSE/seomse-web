@@ -4,23 +4,25 @@ import WeeklyReservationStatus from "../../components/admin/reservationManagemen
 import styles from "./AdminReservationManagement.module.css";
 
 const AdminReservationManagement = () => {
-  return (
-    <div className={styles.screen}>
-      <AdminHeader title="예약현황" />
-      <WeeklyReservationStatus
-        reservations={{
-          월: 100,
-          화: 30,
-          수: 70,
-          목: 0,
-          금: 100,
-          토: 50,
-          일: 10,
-        }}
-      />
-      <ReservationList />
-    </div>
-  );
+    return (
+        <div className={styles.screen}>
+            <AdminHeader title="예약현황" />
+            <div className={styles.content}>
+                <WeeklyReservationStatus
+                    reservations={{
+                        월: 100,
+                        화: 30,
+                        수: 70,
+                        목: 0,
+                        금: 100,
+                        토: 50,
+                        일: 10,
+                    }}
+                />
+                <ReservationList />
+            </div>
+        </div>
+    );
 };
 
 export default AdminReservationManagement;
