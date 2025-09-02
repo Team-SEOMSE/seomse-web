@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
 import AdminNavbar from "../../components/admin/layout/AdminNavbar";
-import AdminHeader from "../../components/admin/layout/AdminHeader";
 import styles from "./AdminLayout.module.css";
 
 const AdminLayout = () => {
@@ -18,7 +17,6 @@ const AdminLayout = () => {
 
   return (
     <div className={styles.layout}>
-      <AdminHeader />
       <main className={styles.content}>
         <Outlet />
       </main>

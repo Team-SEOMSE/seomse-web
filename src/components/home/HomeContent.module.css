@@ -3,6 +3,10 @@
     box-sizing: border-box;
 }
 
+.gap_box {
+    margin-top: 40px;
+}
+
 .cardFill {
     width: 100%;
     position: relative;
@@ -16,6 +20,7 @@
     height: 100%;
     display: block;
     object-fit: cover;
+    border-radius: 20px;
 }
 
 .recBadge {

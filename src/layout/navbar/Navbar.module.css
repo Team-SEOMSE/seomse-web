@@ -44,3 +44,7 @@
 .active {
   color: #1a1a1a;
 }
+
+.active .label {
+  color: #1a1a1a;
+}
