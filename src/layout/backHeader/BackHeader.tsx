@@ -3,18 +3,18 @@ import { ReactComponent as Prev } from "../../assets/svg/prevArrow.svg";
 import styles from "./BackHeader.module.css";
 
 interface BackHeaderProps {
-    title?: string;
+  title?: string;
 }
 
 const BackHeader = ({ title }: BackHeaderProps) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <header className={styles.header}>
-            <Prev onClick={() => navigate(-1)} className={styles.prev_icon} />
-            {title && <h1 className={styles.title}>{title}</h1>}
-        </header>
-    );
+  return (
+    <header className={styles.header}>
+      <Prev onClick={() => navigate(-1)} className={styles.icon} />
+      {title && <h1 className={styles.title}>{title}</h1>}
+    </header>
+  );
 };
 
 export default BackHeader;

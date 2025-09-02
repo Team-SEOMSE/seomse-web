@@ -4,7 +4,7 @@ import { ReactComponent as ReviewIcon } from "../../../assets/svg/review.svg";
 import styles from "../../../layout/navbar/Navbar.module.css";
 
 const TABS = [
-  { to: "/reservation", label: "예약", Icon: CalendarIcon },
+  { to: "/admin/reservations", label: "예약", Icon: CalendarIcon },
   { to: "/trend", label: "리뷰", Icon: ReviewIcon },
 ];
 
