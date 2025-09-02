@@ -8,6 +8,7 @@ import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import InputForm from "../login/InputForm";
 import styles from "./SignupSection.module.css";
+import { setCookie } from "../../hooks/useCookie";
 
 const ACTIVE_STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 600 };
 const DISABLED_STYLE: ButtonStyles = {
@@ -87,9 +88,16 @@ const SignupSection = () => {
     };
 
     signup(signupData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         alert("회원가입이 성공적으로 완료되었습니다.");
-        navigate(`/email-login?email=${encodeURIComponent(signupData.email)}`);
+        if (data?.data?.accessToken) {
+          setCookie("accessToken", data.data.accessToken);
+          navigate("/user-details");
+        } else {
+          navigate(
+            `/email-login?email=${encodeURIComponent(signupData.email)}`
+          );
+        }
       },
       onError: (error) => {
         alert(error.message || "회원가입에 실패했습니다.");
