@@ -1,0 +1,98 @@
+.card {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.date {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.status {
+  font-size: 12px;
+  font-weight: 600;
+  width: 58px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.confirmed {
+  background: #ffeaf0;
+  color: #ff3871;
+}
+
+.pending {
+  background: white;
+  color: #9e9e9e;
+  border: 1px solid #e6e6e6;
+}
+
+.arrow {
+  width: 20px;
+  height: 20px;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+.content {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-size: 12px;
+  color: #ff3871;
+  border: 1px solid #ff3871;
+  background: #ffffff;
+  padding: 4px 8px;
+  border-radius: 50px;
+}
+
+.info_box {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.name {
+  color: #43474d;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #787878;
+  white-space: pre-line;
+}
+
+.description span {
+  color: #ff3871;
+  font-weight: 500;
+}
