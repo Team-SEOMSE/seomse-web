@@ -1,0 +1,100 @@
+.section {
+    margin-top: 32px;
+}
+
+.title {
+    color: #353535;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.service_list {
+    list-style: none;
+    margin: 12px 0 0;
+    padding: 0;
+    overflow: hidden;
+    border-top: 1px solid #ededed;
+}
+
+.service_item {
+    display: flex;
+    gap: 12px;
+    padding: 20px 16px;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer;
+    background: #fff;
+}
+
+.service_item:last-child {
+    border-bottom: 0;
+}
+
+.service_check {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e1e1e1;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.is_selected .service_check {
+    background: #ff3871;
+}
+
+.is_selected .service_check::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    width: 9px;
+    height: 5px;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-right: 0;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.service_body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.service_name {
+    font-size: 14px;
+    color: #353535;
+}
+
+.service_price_row {
+    display: flex;
+    gap: 8px;
+}
+
+.service_discount_percent {
+    color: #ff3871;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.service_discount_price {
+    color: #353535;
+    font-size: 14px;
+}
+
+.service_original_price {
+    color: #bebebe;
+    text-decoration: line-through;
+    font-size: 14px;
+}
+
+.service_name {
+    font-size: 14px;
+    color: #353535;
+}
+
+.service_discount_price {
+    color: #353535;
+    font-size: 14px;
+}

@@ -1,0 +1,53 @@
+.designer_section {
+    padding: 0;
+}
+
+.designer_title {
+    font-weight: 400;
+    margin-top: 12px;
+    color: #353535;
+    font-size: 16px;
+}
+
+.designer_list {
+    display: flex;
+    gap: 18px;
+}
+
+.designer_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.designer_avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid transparent;
+}
+
+.is_selected .designer_avatar {
+    border-color: #ff3871;
+}
+
+.designer_name {
+    display: flex;
+    flex-direction: column;
+}
+
+.designer_name_main {
+    font-size: 12px;
+}
+
+.is_selected .designer_name,
+.is_selected .designer_name_main,
+.is_selected .designer_name_sub {
+    color: #ff3871;
+}
