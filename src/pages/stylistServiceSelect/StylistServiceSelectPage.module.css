@@ -1,0 +1,8 @@
+.screen {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    padding: 20px;
+    background: white;
+    box-sizing: border-box;
+}
