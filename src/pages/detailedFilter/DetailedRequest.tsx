@@ -19,7 +19,9 @@ const DetailedRequest = () => {
 
   const { mutate: createReservation } = usePostApi(
     "createReservation",
-    "/interaction/appointments"
+    "/interaction/appointments",
+    true,
+    "multipart"
   );
 
   const {
@@ -67,7 +69,6 @@ const DetailedRequest = () => {
   const handle_submit = () => {
     const requirements = editorRef.current?.innerText || "";
 
-    // body 생성
     const body: Record<string, unknown> = {
       shopId,
       designerId,
@@ -79,7 +80,6 @@ const DetailedRequest = () => {
       requirements,
     };
 
-    // ❗ 빈 값 제거
     Object.keys(body).forEach((key) => {
       if (body[key] === undefined || body[key] === null || body[key] === "") {
         delete body[key];

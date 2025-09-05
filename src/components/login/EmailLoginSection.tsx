@@ -61,9 +61,6 @@ const EmailLoginSection = () => {
       },
       {
         onSuccess: (data: unknown) => {
-          const expires = new Date();
-          expires.setDate(expires.getDate() + 1);
-
           const response = data as LoginResponse;
           if (response?.data?.accessToken) {
             setCookie("accessToken", response.data.accessToken);
