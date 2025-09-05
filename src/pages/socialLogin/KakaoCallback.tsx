@@ -29,10 +29,14 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     if (data) {
-      const { accessToken } = data.data;
+      const { accessToken, isNew } = data.data;
       setCookie("accessToken", accessToken);
 
-      navigate("/home");
+      if (isNew) {
+        navigate("/user-details");
+      } else {
+        navigate("/home");
+      }
     }
   }, [data, navigate]);
 

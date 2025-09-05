@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AUTH_PATH } from "../../api/URL";
-import useGetApi from "../../api/useGetApi"; // Get 훅 임포트
-import usePostApi from "../../api/usePostApi"; // Post 훅 임포트
+import useGetApi from "../../api/useGetApi";
+import usePostApi from "../../api/usePostApi";
 import BackHeader from "../../layout/backHeader/BackHeader";
 import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import InputForm from "../login/InputForm";
 import styles from "./SignupSection.module.css";
+import { setCookie } from "../../hooks/useCookie";
 
 const ACTIVE_STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 600 };
 const DISABLED_STYLE: ButtonStyles = {
@@ -28,7 +29,7 @@ const DUPCHECK_STYLE: ButtonStyles = {
 const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SignupSection = () => {
-  const [id, setId] = useState(""); // 이메일(아이디)
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [pw, setPw] = useState("");
   const [confirmPw, setConfirmPw] = useState("");
@@ -87,9 +88,16 @@ const SignupSection = () => {
     };
 
     signup(signupData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         alert("회원가입이 성공적으로 완료되었습니다.");
-        navigate(`/email-login?email=${encodeURIComponent(signupData.email)}`);
+        if (data?.data?.accessToken) {
+          setCookie("accessToken", data.data.accessToken);
+          navigate("/user-details");
+        } else {
+          navigate(
+            `/email-login?email=${encodeURIComponent(signupData.email)}`
+          );
+        }
       },
       onError: (error) => {
         alert(error.message || "회원가입에 실패했습니다.");
