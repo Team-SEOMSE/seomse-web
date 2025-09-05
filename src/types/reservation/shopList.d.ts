@@ -19,6 +19,7 @@ export interface ShopApiResponse {
 
 // 샵 상세 API 응답
 export interface ShopDetailApi {
+    shopId: string;
     shopType: string;
     shopName: string;
     shopInfo: string;
