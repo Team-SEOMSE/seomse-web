@@ -19,8 +19,10 @@ const KakaoCallback = () => {
 
     if (code) {
       mutate({
-        code,
-        snsType: "KAKAO",
+        body: {
+          code,
+          snsType: "KAKAO",
+        }
       });
     } else {
       navigate("/kaka-login");

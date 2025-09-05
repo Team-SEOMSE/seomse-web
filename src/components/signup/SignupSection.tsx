@@ -70,8 +70,9 @@ const SignupSection = () => {
         setEmailError(null);
         setIsEmailChecked(true);
       }
-    } catch (err: any) {
-      alert(err.message || "이메일 확인 중 오류가 발생했습니다.");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "이메일 확인 중 오류가 발생했습니다.";
+      alert(errorMessage);
       setIsEmailChecked(false);
     }
   };
@@ -87,7 +88,7 @@ const SignupSection = () => {
       role: "CLIENT",
     };
 
-    signup(signupData, {
+    signup({ body: signupData }, {
       onSuccess: (data) => {
         alert("회원가입이 성공적으로 완료되었습니다.");
         if (data?.data?.accessToken) {
