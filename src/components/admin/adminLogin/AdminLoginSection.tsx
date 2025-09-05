@@ -57,7 +57,7 @@ const AdminLoginSection = () => {
           const response = data as LoginResponse;
           if (response?.data?.accessToken) {
             setCookie("accessToken", response.data.accessToken);
-            navigate("/home");
+            navigate("/admin/reservations");
           }
         },
         onError: () => {
