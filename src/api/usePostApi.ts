@@ -19,7 +19,7 @@ const usePostApi = (
   key: string,
   url: string,
   requireAuth: boolean = true,
-  mode: Mode = "multipart" // 기본은 multipart
+  mode: Mode = "json"
 ) => {
   const COMPOUND_URL = `${API_URL}${url}`;
   const token = getCookie("accessToken");
@@ -32,7 +32,6 @@ const usePostApi = (
     let fetchOptions: RequestInit;
 
     if (mode === "json") {
-      // ✅ JSON 모드
       fetchOptions = {
         method: "POST",
         headers: {
@@ -42,7 +41,6 @@ const usePostApi = (
         body: JSON.stringify(body),
       };
     } else {
-      // ✅ Multipart 모드
       const formData = new FormData();
 
       const jsonString = JSON.stringify(body);
@@ -57,7 +55,7 @@ const usePostApi = (
 
       fetchOptions = {
         method: "POST",
-        headers, // Content-Type 자동 지정 (boundary 포함)
+        headers,
         body: formData,
       };
     }
