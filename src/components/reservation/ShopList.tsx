@@ -11,6 +11,7 @@ import {
   ShopApiResponse,
   ShopDetailApi,
   ShopItem,
+  Designer,
 } from "../../types/reservation/shopList";
 import SectionTitle from "../common/sectionTitle/SectionTitle";
 import Swiper from "../common/swiper/Swiper";
@@ -85,10 +86,11 @@ const ShopList = () => {
   const navigate = useNavigate();
 
   const { data } = useGetApi("shopList", "/shops?type=HAIR_SALON");
-  const apiResponse: ShopApiResponse | undefined = data as
-    | ShopApiResponse
-    | undefined;
-  const apiItems: ShopApiItem[] = apiResponse?.data ?? [];
+
+  const apiItems = useMemo(() => {
+    const apiResponse = data as ShopApiResponse | undefined;
+    return apiResponse?.data ?? [];
+  }, [data]);
 
   const shopBestItems = useMemo(
     () =>
@@ -128,22 +130,21 @@ const ShopList = () => {
     { enabled: !!selectedShop?.shopId }
   );
 
-  // BottomSheet 표시 데이터
-  const bottomSheetData: (ShopItem & { designerId?: string; designers?: Designer[] }) | null =
-    shopDetail?.data
-      ? {
-          ...selectedShop,
-          title: shopDetail.data.shopName,
-          subtitle: shopDetail.data.shopType,
-          src: shopDetail.data.shopImage,
-          shopInfo: [shopDetail.data.shopInfo],
-          shopId: selectedShop?.shopId, // selectedShop에서 가져옴
-          designerId: shopDetail.data.designers?.[0]?.designerId,
-          designers: shopDetail.data.designers,
-        }
-      : selectedShop;
+  const bottomSheetData:
+    | (ShopItem & { designerId?: string; designers?: Designer[] })
+    | null = shopDetail?.data
+    ? {
+        ...selectedShop,
+        title: shopDetail.data.shopName,
+        subtitle: shopDetail.data.shopType,
+        src: shopDetail.data.shopImage,
+        shopInfo: [shopDetail.data.shopInfo],
+        shopId: selectedShop?.shopId,
+        designerId: shopDetail.data.designers?.[0]?.designerId,
+        designers: shopDetail.data.designers,
+      }
+    : selectedShop;
 
-  /** 공통 카드 렌더링 */
   const renderShopCard = (
     it: ShopItem,
     index?: number,
