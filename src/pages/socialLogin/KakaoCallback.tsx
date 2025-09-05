@@ -4,6 +4,13 @@ import usePostApi from "../../api/usePostApi";
 import { setCookie } from "../../hooks/useCookie";
 import { AUTH_PATH } from "../../api/URL";
 
+interface KakaoLoginResponse {
+  data: {
+    accessToken: string;
+    isNew: boolean;
+  };
+}
+
 const KakaoCallback = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -31,7 +38,8 @@ const KakaoCallback = () => {
 
   useEffect(() => {
     if (data) {
-      const { accessToken, isNew } = data.data;
+      const response = data as KakaoLoginResponse;
+      const { accessToken, isNew } = response.data;
       setCookie("accessToken", accessToken);
 
       if (isNew) {
