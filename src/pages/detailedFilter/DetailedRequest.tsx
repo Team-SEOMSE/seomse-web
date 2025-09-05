@@ -1,19 +1,37 @@
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import type { ButtonStyles } from "../../types/common/button";
-import Button from "../../components/common/button/Button";
+import { useLocation, useNavigate } from "react-router-dom";
+import usePostApi from "../../api/usePostApi";
 import preiview from "../../assets/svg/previewImg.svg";
-import styles from "./DetailedRequest.module.css";
+import Button from "../../components/common/button/Button";
 import BackHeader from "../../layout/backHeader/BackHeader";
+import type { ButtonStyles } from "../../types/common/button";
+import styles from "./DetailedRequest.module.css";
 
 const STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 600 };
 
 const DetailedRequest = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [files, setFiles] = useState<File[]>([]);
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [, forceRender] = useState(0);
+
+  const { mutate: createReservation } = usePostApi(
+    "createReservation",
+    "/interaction/appointments"
+  );
+
+  const {
+    shopId,
+    shopName,
+    serviceName,
+    designerId,
+    scaleType,
+    hairType,
+    hairLength,
+    hairTreatmentType,
+  } = location.state || {};
 
   const is_empty_for_placeholder = () => {
     const el = editorRef.current;
@@ -23,55 +41,6 @@ const DetailedRequest = () => {
     return no_text && no_img;
   };
 
-  const place_caret_at_end = (el: HTMLElement) => {
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    const sel = window.getSelection();
-    sel?.removeAllRanges();
-    sel?.addRange(range);
-  };
-
-  const ensure_caret_in_editor = () => {
-    const el = editorRef.current;
-    if (!el) return;
-    const sel = window.getSelection();
-    if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode)) {
-      el.focus();
-      place_caret_at_end(el);
-    }
-  };
-
-  const insert_image_at_cursor = (url: string) => {
-    const el = editorRef.current;
-    if (!el) return;
-    ensure_caret_in_editor();
-
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "첨부 이미지";
-    img.className = styles.inline_img;
-
-    const sel = window.getSelection();
-    const range = sel && sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
-    if (range) {
-      range.collapse(false);
-      range.insertNode(img);
-      const spacer = document.createElement("div");
-      spacer.appendChild(document.createElement("br"));
-      img.after(spacer);
-      const next = document.createRange();
-      next.setStart(spacer, 0);
-      next.collapse(true);
-      sel!.removeAllRanges();
-      sel!.addRange(next);
-    } else {
-      el.appendChild(img);
-    }
-    forceRender((n) => n + 1);
-  };
-
-  // ✅ 파일 업로드 처리
   const handle_files = (list: FileList | null) => {
     if (!list || !list.length) return;
     const arr = Array.from(list);
@@ -84,30 +53,54 @@ const DetailedRequest = () => {
     editorRef.current?.focus();
   };
 
-  // ✅ 제출 + 이동
-  const handle_submit = async () => {
-    const fd = new FormData();
-    fd.append("contentHtml", editorRef.current?.innerHTML || "");
-    fd.append("contentText", editorRef.current?.innerText || "");
-    files.forEach((f, i) => fd.append("images", f, f.name || `img-${i}`));
+  const insert_image_at_cursor = (url: string) => {
+    const el = editorRef.current;
+    if (!el) return;
+    const img = document.createElement("img");
+    img.src = url;
+    img.alt = "첨부 이미지";
+    img.className = styles.inline_img;
+    el.appendChild(img);
+    forceRender((n) => n + 1);
+  };
 
-    try {
-      await fetch("/api/reservation/request", {
-        method: "POST",
-        body: fd,
-      });
-      navigate("/reservation", {
-        replace: true,
-        state: {
-          confirmed: true,
-          shopName: "박승철 헤어샵 강남점",
-          serviceName: "볼륨매직",
+  const handle_submit = () => {
+    const requirements = editorRef.current?.innerText || "";
+
+    // body 생성
+    const body: Record<string, unknown> = {
+      shopId,
+      designerId,
+      serviceName,
+      scaleType,
+      hairType,
+      hairLength,
+      hairTreatmentType,
+      requirements,
+    };
+
+    // ❗ 빈 값 제거
+    Object.keys(body).forEach((key) => {
+      if (body[key] === undefined || body[key] === null || body[key] === "") {
+        delete body[key];
+      }
+    });
+
+    createReservation(
+      { body, file: files[0] },
+      {
+        onSuccess: (data) => {
+          console.log(data);
+          navigate("/reservation", {
+            replace: true,
+            state: { confirmed: true, shopName, serviceName },
+          });
         },
-      });
-    } catch (err) {
-      console.error("제출 실패:", err);
-      alert("제출에 실패했습니다. 다시 시도해주세요.");
-    }
+        onError: (err) => {
+          console.error(err);
+        },
+      }
+    );
   };
 
   return (
@@ -136,16 +129,13 @@ const DetailedRequest = () => {
             </p>
           </div>
         )}
-
         <div
           ref={editorRef}
           className={styles.editor}
           contentEditable
-          onInput={() => forceRender((n) => n + 1)}
           aria-label="요청사항 입력"
           suppressContentEditableWarning
         />
-
         <input
           ref={fileInputRef}
           type="file"
@@ -158,10 +148,7 @@ const DetailedRequest = () => {
 
       <div className={styles.button_wrapper}>
         <Button
-          elements={{
-            content: "다음",
-            handleClick: handle_submit,
-          }}
+          elements={{ content: "다음", handleClick: handle_submit }}
           style={STYLE}
         />
       </div>

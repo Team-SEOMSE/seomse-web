@@ -15,7 +15,7 @@ type Props = {
     items: ServiceItem[];
     title?: string;
     defaultCategory?: "cut" | "perm" | string;
-    onChange?: (id: string) => void;
+    onChange?: (item: ServiceItem) => void;
 };
 
 const formatWon = (n: number) => `${n.toLocaleString("ko-KR")}원`;
@@ -44,14 +44,14 @@ const StyleSelect = ({
     const [selected, setSelected] = useState<string>("");
 
     useEffect(() => {
-        const first = filtered[0]?.id ?? "";
-        setSelected(first);
+        const first = filtered[0] ?? null;
+        setSelected(first?.id ?? "");
         if (first) onChange?.(first);
     }, [category, filtered]);
 
-    const select = (id: string) => {
-        setSelected(id);
-        onChange?.(id);
+    const select = (item: ServiceItem) => {
+        setSelected(item.id);
+        onChange?.(item);
     };
 
     return (
@@ -84,7 +84,7 @@ const StyleSelect = ({
                             }`}
                             role="radio"
                             aria-checked={isSelected}
-                            onClick={() => select(it.id)}
+                            onClick={() => select(it)}
                         >
                             <span
                                 className={styles.service_check}

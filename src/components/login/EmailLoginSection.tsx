@@ -9,6 +9,12 @@ import usePostApi from "../../api/usePostApi";
 import { AUTH_PATH } from "../../api/URL";
 import { setCookie } from "../../hooks/useCookie";
 
+interface LoginResponse {
+  data: {
+    accessToken: string;
+  };
+}
+
 const ACTIVE_STYLE: ButtonStyles = {
   color: "#ffffff",
   fontWeight: 600,
@@ -47,17 +53,20 @@ const EmailLoginSection = () => {
 
     login(
       {
-        email: id,
-        password: pw,
-        role: "CLIENT",
+        body: {
+          email: id,
+          password: pw,
+          role: "CLIENT",
+        },
       },
       {
-        onSuccess: (data) => {
+        onSuccess: (data: unknown) => {
           const expires = new Date();
           expires.setDate(expires.getDate() + 1);
 
-          if (data?.data?.accessToken) {
-            setCookie("accessToken", data.data.accessToken);
+          const response = data as LoginResponse;
+          if (response?.data?.accessToken) {
+            setCookie("accessToken", response.data.accessToken);
             navigate("/home");
           }
         },

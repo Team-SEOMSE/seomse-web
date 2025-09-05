@@ -2,39 +2,85 @@ import { useMutation } from "@tanstack/react-query";
 import { getCookie } from "../hooks/useCookie";
 import { API_URL } from "./URL";
 
-const usePostApi = (key: string, url: string, requireAuth: boolean = true) => {
+type Mode = "json" | "multipart";
+
+interface ErrorResponse {
+  code?: string;
+  message: string;
+  [key: string]: unknown;
+}
+
+interface MutationVars {
+  body: Record<string, unknown>;
+  file?: File;
+}
+
+const usePostApi = (
+  key: string,
+  url: string,
+  requireAuth: boolean = true,
+  mode: Mode = "multipart" // 기본은 multipart
+) => {
   const COMPOUND_URL = `${API_URL}${url}`;
   const token = getCookie("accessToken");
 
-  const postData = async (body: Record<string, unknown>) => {
+  const postData = async (body: Record<string, unknown>, file?: File) => {
     const headers: HeadersInit = {
-      "Content-Type": "application/json",
       ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
-    const res = await fetch(COMPOUND_URL, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(body),
-    });
+    let fetchOptions: RequestInit;
 
-    if (!res.ok) {
-      const errorResponse = await res.json();
-      throw new Error(errorResponse.message);
+    if (mode === "json") {
+      // ✅ JSON 모드
+      fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        body: JSON.stringify(body),
+      };
+    } else {
+      // ✅ Multipart 모드
+      const formData = new FormData();
+
+      const jsonString = JSON.stringify(body);
+      const jsonBlob = new Blob([jsonString], {
+        type: "application/json;charset=utf-8",
+      });
+      formData.append("request", jsonBlob, "request.json");
+
+      if (file) {
+        formData.append("requirementsImage", file, file.name);
+      }
+
+      fetchOptions = {
+        method: "POST",
+        headers, // Content-Type 자동 지정 (boundary 포함)
+        body: formData,
+      };
     }
 
-    return await res.json();
+    const res = await fetch(COMPOUND_URL, fetchOptions);
+
+    if (!res.ok) {
+      let errorResponse: ErrorResponse;
+      try {
+        errorResponse = (await res.json()) as ErrorResponse;
+      } catch {
+        errorResponse = { message: "서버에서 JSON 응답 아님" };
+      }
+      console.error("❌ 서버 에러 응답:", errorResponse);
+      throw new Error(errorResponse.message || "Unknown server error");
+    }
+
+    return (await res.json()) as unknown;
   };
 
   const { mutate, data, error, isError, isPending } = useMutation({
     mutationKey: [key],
-    mutationFn: postData,
-    onSuccess: () => {
-      console.log(`요청 성공`);
-    },
-    onError: (error) => {
-      console.log(`요청 실패: ${error}`);
-    },
+    mutationFn: (vars: MutationVars) => postData(vars.body, vars.file),
   });
 
   return { data, isPending, error, isError, mutate };

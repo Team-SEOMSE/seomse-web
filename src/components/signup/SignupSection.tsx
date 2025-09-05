@@ -10,6 +10,12 @@ import InputForm from "../login/InputForm";
 import styles from "./SignupSection.module.css";
 import { setCookie } from "../../hooks/useCookie";
 
+interface SignupResponse {
+  data?: {
+    accessToken?: string;
+  };
+}
+
 const ACTIVE_STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 600 };
 const DISABLED_STYLE: ButtonStyles = {
   color: "#787878",
@@ -70,8 +76,9 @@ const SignupSection = () => {
         setEmailError(null);
         setIsEmailChecked(true);
       }
-    } catch (err: any) {
-      alert(err.message || "이메일 확인 중 오류가 발생했습니다.");
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "이메일 확인 중 오류가 발생했습니다.";
+      alert(errorMessage);
       setIsEmailChecked(false);
     }
   };
@@ -87,11 +94,12 @@ const SignupSection = () => {
       role: "CLIENT",
     };
 
-    signup(signupData, {
-      onSuccess: (data) => {
+    signup({ body: signupData }, {
+      onSuccess: (data: unknown) => {
         alert("회원가입이 성공적으로 완료되었습니다.");
-        if (data?.data?.accessToken) {
-          setCookie("accessToken", data.data.accessToken);
+        const response = data as SignupResponse;
+        if (response?.data?.accessToken) {
+          setCookie("accessToken", response.data.accessToken);
           navigate("/user-details");
         } else {
           navigate(
@@ -99,7 +107,7 @@ const SignupSection = () => {
           );
         }
       },
-      onError: (error) => {
+      onError: (error: Error) => {
         alert(error.message || "회원가입에 실패했습니다.");
       },
     });
