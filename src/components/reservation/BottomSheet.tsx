@@ -11,8 +11,8 @@ interface BottomSheetProps {
     isOpen?: boolean;
     time?: string;
     shopInfo?: string[];
-    details?: string;
     onClose: () => void;
+    shopId?: string;
     onSimpleReservation: () => void;
 }
 
@@ -25,14 +25,14 @@ const BottomSheet = ({
     time,
     shopInfo,
     onClose,
-    onSimpleReservation,
+    shopId,
 }: BottomSheetProps) => {
     const navigate = useNavigate();
 
     const buttonElements = {
         content: "섬세한 예약하기",
         handleClick: () => {
-            navigate("/reservation-filter", {
+            navigate("/set-schedule", {
                 state: { shopName: title },
             });
         },
@@ -81,7 +81,11 @@ const BottomSheet = ({
                     <Button elements={buttonElements} style={STYLE} />
                     <p
                         className={styles.simple_book_button}
-                        onClick={onSimpleReservation}
+                        onClick={() =>
+                            navigate("/set-schedule", {
+                                state: { shopId, shopName: title },
+                            })
+                        }
                     >
                         그냥 예약하기
                     </p>

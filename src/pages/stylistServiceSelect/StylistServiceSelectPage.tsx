@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Button from "../../components/common/button/Button";
 import DesignerSelect, {
     DesignerItem,
 } from "../../components/stylistServiceSelect/DesignerSelect";
@@ -5,6 +8,7 @@ import StyleSelect, {
     ServiceItem,
 } from "../../components/stylistServiceSelect/StyleSelect";
 import BackHeader from "../../layout/backHeader/BackHeader";
+import type { ButtonStyles } from "../../types/common/button";
 import styles from "./StylistServiceSelectPage.module.css";
 
 const designers: DesignerItem[] = [
@@ -65,12 +69,47 @@ const services: ServiceItem[] = [
     },
 ];
 
+const STYLE: ButtonStyles = { color: "#ffffff", fontWeight: 500 };
+
 const StylistServiceSelectPage = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const shopId = location.state?.shopId || "";
+    const shopName = location.state?.shopName || "";
+
+    const [selectedService, setSelectedService] = useState<string>("");
+
+    const handleReservation = () => {
+        if (!selectedService) return;
+        const service = services.find((s) => s.id === selectedService);
+
+        navigate("/reservation-filter", {
+            state: {
+                shopId,
+                shopName,
+                serviceName: service?.name ?? "",
+                designerId: "",
+            },
+        });
+    };
+
+    const buttonElements = {
+        content: "다음",
+        handleClick: handleReservation,
+    };
+
     return (
         <div className={styles.screen}>
             <BackHeader />
             <DesignerSelect items={designers} />
-            <StyleSelect items={services} />
+            <StyleSelect
+                items={services}
+                onChange={(item) => setSelectedService(item.id)}
+            />
+
+            <div className={styles.button_group}>
+                <Button elements={buttonElements} style={STYLE} />
+            </div>
         </div>
     );
 };

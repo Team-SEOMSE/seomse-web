@@ -202,6 +202,7 @@ const ShopList = () => {
                     time={bottomSheetData.time}
                     shopInfo={bottomSheetData.shopInfo}
                     onClose={closeBottomSheet}
+                    shopId={bottomSheetData.shopId}
                     onSimpleReservation={() =>
                         handleSimpleReservation(bottomSheetData)
                     }
