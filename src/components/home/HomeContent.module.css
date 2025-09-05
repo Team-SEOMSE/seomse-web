@@ -3,6 +3,12 @@
   box-sizing: border-box;
 }
 
+.aiTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .recInfo {
   background: linear-gradient(90deg, #ff3871 0%, #ff6b9a 100%);
   color: white;
@@ -10,7 +16,6 @@
   border-radius: 16px;
   font-size: 12px;
   font-weight: 600;
-  position: relative;
 }
 
 .gap_box {

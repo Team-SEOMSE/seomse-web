@@ -102,18 +102,14 @@ const HomeContent = () => {
 
   return (
     <div className={styles.section}>
-      <SectionTitle
-        icon={<AiRecommend />}
-        sideSlot={
-          data && (
-            <div className={styles.recInfo}>
-              {translateRecommendationText(data.data.age, data.data.gender)}
-            </div>
-          )
-        }
-      >
-        AI 개인화 추천
-      </SectionTitle>
+      <div className={styles.aiTitleContainer}>
+        <SectionTitle icon={<AiRecommend />}>AI 개인화 추천</SectionTitle>
+        {data && (
+          <div className={styles.recInfo}>
+            {translateRecommendationText(data.data.age, data.data.gender)}
+          </div>
+        )}
+      </div>
       <Swiper
         items={recommendItems}
         aspect="auto"
