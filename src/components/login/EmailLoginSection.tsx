@@ -47,9 +47,11 @@ const EmailLoginSection = () => {
 
     login(
       {
-        email: id,
-        password: pw,
-        role: "CLIENT",
+        body: {
+          email: id,
+          password: pw,
+          role: "CLIENT",
+        }
       },
       {
         onSuccess: (data) => {
