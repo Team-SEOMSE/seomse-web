@@ -2,51 +2,88 @@ import { useMutation } from "@tanstack/react-query";
 import { getCookie } from "../hooks/useCookie";
 import { API_URL } from "./URL";
 
-const usePostApi = (key: string, url: string, requireAuth: boolean = true) => {
-    const COMPOUND_URL = `${API_URL}${url}`;
-    const token = getCookie("accessToken");
+type Mode = "json" | "multipart";
 
-    const postData = async (body: Record<string, unknown>, file?: File) => {
-        const formData = new FormData();
+interface ErrorResponse {
+  code?: string;
+  message: string;
+  [key: string]: unknown;
+}
 
-        // JSON을 "request" 파트에 넣음
-        formData.append(
-            "request",
-            new Blob([JSON.stringify(body)], { type: "application/json" })
-        );
+interface MutationVars {
+  body: Record<string, unknown>;
+  file?: File;
+}
 
-        // 이미지가 있으면 requirementsImage로 추가
-        if (file) {
-            formData.append("requirementsImage", file);
-        }
+const usePostApi = (
+  key: string,
+  url: string,
+  requireAuth: boolean = true,
+  mode: Mode = "multipart" // 기본은 multipart
+) => {
+  const COMPOUND_URL = `${API_URL}${url}`;
+  const token = getCookie("accessToken");
 
-        const headers: HeadersInit = {
-            ...(requireAuth && token
-                ? { Authorization: `Bearer ${token}` }
-                : {}),
-        };
-
-        const res = await fetch(COMPOUND_URL, {
-            method: "POST",
-            headers,
-            body: formData,
-        });
-
-        if (!res.ok) {
-            const errorResponse = await res.json();
-            throw new Error(errorResponse.message);
-        }
-
-        return await res.json();
+  const postData = async (body: Record<string, unknown>, file?: File) => {
+    const headers: HeadersInit = {
+      ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
     };
 
-    const { mutate, data, error, isError, isPending } = useMutation({
-        mutationKey: [key],
-        mutationFn: (vars: { body: Record<string, unknown>; file?: File }) =>
-            postData(vars.body, vars.file),
-    });
+    let fetchOptions: RequestInit;
 
-    return { data, isPending, error, isError, mutate };
+    if (mode === "json") {
+      // ✅ JSON 모드
+      fetchOptions = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...headers,
+        },
+        body: JSON.stringify(body),
+      };
+    } else {
+      // ✅ Multipart 모드
+      const formData = new FormData();
+
+      const jsonString = JSON.stringify(body);
+      const jsonBlob = new Blob([jsonString], {
+        type: "application/json;charset=utf-8",
+      });
+      formData.append("request", jsonBlob, "request.json");
+
+      if (file) {
+        formData.append("requirementsImage", file, file.name);
+      }
+
+      fetchOptions = {
+        method: "POST",
+        headers, // Content-Type 자동 지정 (boundary 포함)
+        body: formData,
+      };
+    }
+
+    const res = await fetch(COMPOUND_URL, fetchOptions);
+
+    if (!res.ok) {
+      let errorResponse: ErrorResponse;
+      try {
+        errorResponse = (await res.json()) as ErrorResponse;
+      } catch {
+        errorResponse = { message: "서버에서 JSON 응답 아님" };
+      }
+      console.error("❌ 서버 에러 응답:", errorResponse);
+      throw new Error(errorResponse.message || "Unknown server error");
+    }
+
+    return (await res.json()) as unknown;
+  };
+
+  const { mutate, data, error, isError, isPending } = useMutation({
+    mutationKey: [key],
+    mutationFn: (vars: MutationVars) => postData(vars.body, vars.file),
+  });
+
+  return { data, isPending, error, isError, mutate };
 };
 
 export default usePostApi;
