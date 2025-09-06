@@ -1,22 +1,57 @@
 import ReservationCard from "./ReservationCard";
+import useGetApi from "../../../api/useGetApi";
 import styles from "./ReservationList.module.css";
 
+interface Appointment {
+  appointmentId: string;
+  appointmentDate: string;
+  shopName: string;
+  designerNickname: string;
+  serviceName: string;
+}
+
+interface AppointmentsResponse {
+  data: Appointment[];
+}
+
+const formatDate = (iso: string) => {
+  const date = new Date(iso);
+  return date.toLocaleDateString("ko-KR", {
+    month: "2-digit",
+    day: "2-digit",
+    weekday: "short",
+  });
+};
+
+const formatTime = (iso: string) => {
+  const date = new Date(iso);
+  return date.toLocaleTimeString("ko-KR", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
 const ReservationList = () => {
+  const { data } = useGetApi("appointments", "/interaction/appointments");
+  console.log(data);
+  const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
+
   return (
     <section className={styles.section}>
       <p className={styles.title}>
-        예약리스트 <span>n</span>건
+        예약리스트 <span>{list.length}</span>건
       </p>
-      <ReservationCard
-        date="06.24 (토)"
-        time="오후 6:00"
-        status="방문확정"
-        tags={["지성두피", "손상모", "탈색모"]}
-        name="김섬세"
-        description="민감두피인데, 탈색할때마다 두피 상태 고려 안해주시는 미용실 때문에..."
-      />
 
-      <ReservationCard date="06.24 (토)" time="오후 6:00" status="대기중" />
+      {list.map((it) => (
+        <ReservationCard
+          key={it.appointmentId}
+          appointmentId={it.appointmentId}
+          date={formatDate(it.appointmentDate)}
+          time={formatTime(it.appointmentDate)}
+          status="방문확정"
+        />
+      ))}
     </section>
   );
 };

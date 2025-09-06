@@ -30,5 +30,7 @@
     background: #f8f8f8;
     padding-bottom: 150px;
     box-sizing: border-box;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }

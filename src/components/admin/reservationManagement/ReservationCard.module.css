@@ -96,3 +96,25 @@
   color: #ff3871;
   font-weight: 500;
 }
+
+.image_container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+
+.image_wrapper {
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.reservation_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
