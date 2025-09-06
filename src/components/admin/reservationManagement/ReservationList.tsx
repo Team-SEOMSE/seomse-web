@@ -50,6 +50,7 @@ const ReservationList = () => {
           date={formatDate(it.appointmentDate)}
           time={formatTime(it.appointmentDate)}
           designerNickname={it.designerNickname}
+          serviceName={it.serviceName}
           status="방문확정"
         />
       ))}
