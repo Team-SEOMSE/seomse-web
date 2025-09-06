@@ -34,7 +34,6 @@ const formatTime = (iso: string) => {
 
 const ReservationList = () => {
   const { data } = useGetApi("appointments", "/interaction/appointments");
-  console.log(data);
   const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
 
   return (
