@@ -4,73 +4,78 @@ import Tabs from "../trend/Tabs";
 import ReservationCard from "./ReservationCard";
 import { useNavigate } from "react-router-dom";
 import styles from "./ReservationDetails.module.css";
+import useGetApi from "../../api/useGetApi";
 
-type CardData = {
-  id: string;
-  dateTime: string;
-  title: string;
-  subtitle: string;
-  status: string;
-  dday: string;
+interface Appointment {
+  appointmentId: number;
+  appointmentDate: string;
+  serviceName: string;
+  designerNickname: string;
+  shopName: string;
+}
+
+interface AppointmentsResponse {
+  data: Appointment[];
+}
+
+const formatDateTime = (isoString: string) => {
+  const date = new Date(isoString);
+  return date.toLocaleString("ko-KR", {
+    month: "long",
+    day: "numeric",
+    weekday: "short",
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
 };
 
-const MOCK: Record<"upcoming" | "done", CardData[]> = {
-  upcoming: [
-    {
-      id: "1",
-      dateTime: "9월 15일 토요일 AM 11:30",
-      title: "볼륨매직, 기장추가",
-      subtitle: "섬세 디자이너 | 준오헤어 압구정점",
-      status: "방문확정",
-      dday: "D-4",
-    },
-  ],
-  done: [
-    {
-      id: "3",
-      dateTime: "8월 30일 금요일 PM 5:30",
-      title: "뿌리염색",
-      subtitle: "이지은 디자이너 | 샵XYZ",
-      status: "방문완료",
-      dday: "완료",
-    },
-  ],
+const calcDday = (isoString: string) => {
+  const today = new Date();
+  const target = new Date(isoString);
+  today.setHours(0, 0, 0, 0);
+  target.setHours(0, 0, 0, 0);
+  const diff = Math.floor(
+    (target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+  );
+  if (diff > 0) return `D-${diff}`;
+  if (diff === 0) return "D-Day";
+  return "완료";
 };
 
 const ReservationDetails = () => {
-  const [tab, setTab] = useState<"upcoming" | "done">("upcoming");
+  const [tab, setTab] = useState<"all">("all");
   const navigate = useNavigate();
-
-  const list = MOCK[tab];
+  const { data } = useGetApi("appointments", "/interaction/appointments");
+  const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
 
   return (
     <div className={styles.screen}>
       <SectionTitle>내 예약</SectionTitle>
-
       <Tabs
-        items={[
-          { key: "upcoming", label: "다가오는 예약" },
-          { key: "done", label: "지난 예약" },
-        ]}
+        items={[{ key: "all", label: "전체" }]}
         value={tab}
         onChange={(k) => setTab(k as typeof tab)}
       />
-
       <div className={styles.card_wrapper}>
         {list.length ? (
           list.map((it) => (
             <ReservationCard
-              key={it.id}
-              dateTime={it.dateTime}
-              title={it.title}
-              subtitle={it.subtitle}
-              status={it.status}
-              dday={it.dday}
+              key={it.appointmentId}
+              dateTime={formatDateTime(it.appointmentDate)}
+              title={it.serviceName}
+              subtitle={`${it.designerNickname} 디자이너 | ${it.shopName}`}
+              status={
+                calcDday(it.appointmentDate) === "완료"
+                  ? "방문완료"
+                  : "방문예정"
+              }
+              dday={calcDday(it.appointmentDate)}
               onClick={
-                tab === "done"
+                calcDday(it.appointmentDate) === "완료"
                   ? () =>
-                      navigate(`../review/${it.id}`, {
-                        state: { salonName: "준오헤어 강남점" },
+                      navigate(`../review/${it.appointmentId}`, {
+                        state: { salonName: it.shopName },
                       })
                   : undefined
               }
