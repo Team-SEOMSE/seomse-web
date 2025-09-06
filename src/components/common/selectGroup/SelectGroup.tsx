@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import styles from "./SelectGroup.module.css";
 
 interface SelectGroupProps {
@@ -7,6 +7,7 @@ interface SelectGroupProps {
   options: string[];
   optionIcons?: ReactNode[];
   multiple?: boolean;
+  value?: string | string[];
   onChange?: (selected: string[] | string) => void;
 }
 
@@ -16,9 +17,20 @@ const SelectGroup = ({
   options,
   optionIcons = [],
   multiple = false,
+  value,
   onChange,
 }: SelectGroupProps) => {
   const [selected, setSelected] = useState<string[]>([]);
+  
+  useEffect(() => {
+    if (value) {
+      if (Array.isArray(value)) {
+        setSelected(value);
+      } else if (value) {
+        setSelected([value]);
+      }
+    }
+  }, [value]);
 
   const handleClick = (option: string) => {
     let newSelected: string[];
