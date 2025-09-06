@@ -13,6 +13,7 @@ interface ErrorResponse {
 interface MutationVars {
   body: Record<string, unknown>;
   file?: File;
+  fileKey?: string;
 }
 
 const usePostApi = (
@@ -24,7 +25,11 @@ const usePostApi = (
   const COMPOUND_URL = `${API_URL}${url}`;
   const token = getCookie("accessToken");
 
-  const postData = async (body: Record<string, unknown>, file?: File) => {
+  const postData = async (
+    body: Record<string, unknown>,
+    file?: File,
+    fileKey?: string
+  ) => {
     const headers: HeadersInit = {
       ...(requireAuth && token ? { Authorization: `Bearer ${token}` } : {}),
     };
@@ -49,8 +54,8 @@ const usePostApi = (
       });
       formData.append("request", jsonBlob, "request.json");
 
-      if (file) {
-        formData.append("requirementsImage", file, file.name);
+      if (file && fileKey) {
+        formData.append(fileKey, file, file.name);
       }
 
       fetchOptions = {
@@ -69,7 +74,7 @@ const usePostApi = (
       } catch {
         errorResponse = { message: "서버에서 JSON 응답 아님" };
       }
-      console.error("❌ 서버 에러 응답:", errorResponse);
+      console.error(errorResponse);
       throw new Error(errorResponse.message || "Unknown server error");
     }
 
@@ -78,7 +83,8 @@ const usePostApi = (
 
   const { mutate, data, error, isError, isPending } = useMutation({
     mutationKey: [key],
-    mutationFn: (vars: MutationVars) => postData(vars.body, vars.file),
+    mutationFn: (vars: MutationVars) =>
+      postData(vars.body, vars.file, vars.fileKey),
   });
 
   return { data, isPending, error, isError, mutate };

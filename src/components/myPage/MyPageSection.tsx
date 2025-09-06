@@ -6,6 +6,7 @@ import styles from "./MyPageSection.module.css";
 
 const MyPageSection = () => {
   const navigate = useNavigate();
+
   return (
     <div className={styles.section}>
       <div className={styles.wrap}>

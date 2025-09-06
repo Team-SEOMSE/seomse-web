@@ -87,7 +87,7 @@ const DetailedRequest = () => {
     });
 
     createReservation(
-      { body, file: files[0] },
+      { body, file: files[0], fileKey: "requirementsImage" },
       {
         onSuccess: (data) => {
           console.log(data);

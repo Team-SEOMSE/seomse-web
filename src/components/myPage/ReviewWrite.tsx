@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import pinkStar from "../../assets/svg/pinkStar.svg";
 import grayStar from "../../assets/svg/grayStar.svg";
 import preiview from "../../assets/svg/previewImg.svg";
 import styles from "./ReviewWrite.module.css";
+import usePostApi from "../../api/usePostApi";
 
 type NavState = { salonName?: string };
 
@@ -18,6 +19,7 @@ const DISABLED_STYLE: ButtonStyles = {
 
 const ReviewWrite = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const { state } = useLocation() as { state: NavState };
   const salonName = state?.salonName ?? "매장명";
 
@@ -26,6 +28,13 @@ const ReviewWrite = () => {
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [, forceRender] = useState(0);
+
+  const { mutate, isPending } = usePostApi(
+    "review",
+    "/interaction/reviews",
+    true,
+    "multipart"
+  );
 
   const has_text = () => {
     const el = editorRef.current;
@@ -41,81 +50,48 @@ const ReviewWrite = () => {
     return no_text && no_img;
   };
 
-  const place_caret_at_end = (el: HTMLElement) => {
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    range.collapse(false);
-    const sel = window.getSelection();
-    sel?.removeAllRanges();
-    sel?.addRange(range);
-  };
-
-  const ensure_caret_in_editor = () => {
-    const el = editorRef.current;
-    if (!el) return;
-    const sel = window.getSelection();
-    if (!sel || sel.rangeCount === 0 || !el.contains(sel.anchorNode)) {
-      el.focus();
-      place_caret_at_end(el);
-    }
-  };
-
-  const insert_image_at_cursor = (url: string) => {
-    const el = editorRef.current;
-    if (!el) return;
-    ensure_caret_in_editor();
-
-    const img = document.createElement("img");
-    img.src = url;
-    img.alt = "첨부 이미지";
-    img.className = styles.inline_img;
-
-    const sel = window.getSelection();
-    const range = sel && sel.rangeCount > 0 ? sel.getRangeAt(0) : null;
-    if (range) {
-      range.collapse(false);
-      range.insertNode(img);
-      const spacer = document.createElement("div");
-      spacer.appendChild(document.createElement("br"));
-      img.after(spacer);
-      const next = document.createRange();
-      next.setStart(spacer, 0);
-      next.collapse(true);
-      sel!.removeAllRanges();
-      sel!.addRange(next);
-    } else {
-      el.appendChild(img);
-    }
-    forceRender((n) => n + 1);
-  };
-
   const handle_files = (list: FileList | null) => {
     if (!list || !list.length) return;
     const arr = Array.from(list);
     setFiles((prev) => [...prev, ...arr]);
     arr.forEach((f) => {
       const url = URL.createObjectURL(f);
-      insert_image_at_cursor(url);
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = "첨부 이미지";
+      img.className = styles.inline_img;
+      editorRef.current?.appendChild(img);
     });
     if (fileInputRef.current) fileInputRef.current.value = "";
     editorRef.current?.focus();
   };
 
-  const handle_paste: React.ClipboardEventHandler<HTMLDivElement> = (e) => {
-    const items = e.clipboardData?.files;
-    if (items && items.length) {
-      e.preventDefault();
-      handle_files(items);
+  const handle_submit = () => {
+    if (!id) {
+      alert("예약 ID가 없습니다.");
+      return;
     }
-  };
 
-  const handle_submit = async () => {
-    const fd = new FormData();
-    fd.append("rating", String(rating));
-    fd.append("contentHtml", editorRef.current?.innerHTML || "");
-    fd.append("contentText", editorRef.current?.innerText || "");
-    files.forEach((f, i) => fd.append("images", f, f.name || `img-${i}`));
-    navigate("done", { replace: true });
+    const body = {
+      appointmentId: id,
+      reviewRating: String(rating),
+      reviewContent: editorRef.current?.innerText || "",
+    };
+
+    const file = files.length > 0 ? files[0] : undefined;
+
+    mutate(
+      { body, file, fileKey: "reviewImage" },
+      {
+        onSuccess: () => {
+          navigate("done", { replace: true });
+        },
+        onError: (error) => {
+          console.error("리뷰 등록 실패:", error);
+          alert("리뷰 등록에 실패했습니다. 다시 시도해주세요.");
+        },
+      }
+    );
   };
 
   const is_active = has_text();
@@ -175,7 +151,6 @@ const ReviewWrite = () => {
           className={styles.editor}
           contentEditable
           onInput={() => forceRender((n) => n + 1)}
-          onPaste={handle_paste}
           aria-label="리뷰 입력"
           suppressContentEditableWarning
         />
@@ -192,9 +167,12 @@ const ReviewWrite = () => {
 
       <div className={styles.button_wrapper}>
         <Button
-          elements={{ content: "리뷰 등록", handleClick: handle_submit }}
+          elements={{
+            content: "리뷰 등록",
+            handleClick: handle_submit,
+          }}
           style={is_active ? ACTIVE_STYLE : DISABLED_STYLE}
-          disabled={!is_active}
+          disabled={!is_active || isPending}
         />
       </div>
     </div>
