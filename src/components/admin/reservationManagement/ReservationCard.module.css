@@ -56,11 +56,30 @@
   border-top: 1px solid #f2f2f2;
 }
 
+.tags_container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.designer_name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.divider {
+  color: #e6e6e6;
+  margin: 0 8px;
+  font-weight: 300;
+}
+
 .tags {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
 }
 
 .tag {

@@ -62,7 +62,7 @@ const ReviewCard = ({
 
         <div className={styles.service_section}>
           <div>
-            <span>{designerNickName}</span>
+            <span>{designerNickName} 디자이너</span>
             <span className={styles.devider}>|</span>
             <span>{serviceName}</span>
           </div>
