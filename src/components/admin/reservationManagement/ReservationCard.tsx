@@ -8,6 +8,7 @@ interface ReservationCardProps {
   date: string;
   time: string;
   designerNickname: string;
+  serviceName: string;
   status: "방문확정" | "대기중";
 }
 
@@ -77,6 +78,7 @@ const ReservationCard = ({
   date,
   time,
   designerNickname,
+  serviceName,
   status,
 }: ReservationCardProps) => {
   const [open, setOpen] = useState(false);
@@ -129,9 +131,10 @@ const ReservationCard = ({
           {!isLoading && detail && (
             <>
               <div className={styles.tags_container}>
-                <span className={styles.designer_name}>
-                  {designerNickname} 디자이너
-                </span>
+                <p className={styles.details}>
+                  {designerNickname} 디자이너{""}
+                  <span className={styles.devide}> | </span> {serviceName}
+                </p>
                 {tags.length > 0 && (
                   <>
                     <div className={styles.tags}>
