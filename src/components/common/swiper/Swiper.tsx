@@ -37,6 +37,7 @@ type SwiperProps = {
     renderItem?: (item: SwiperItem, index: number) => ReactNode;
     slideWidth?: string | number;
     gap?: string | number;
+    showDots?: boolean; // ✅ 새로 추가
 };
 
 function clamp(n: number, min: number, max: number) {
@@ -58,6 +59,7 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
         renderItem,
         slideWidth,
         gap,
+        showDots = false, // ✅ 기본값 false
     } = props;
 
     const trackRef = useRef<HTMLDivElement>(null);
@@ -211,6 +213,22 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
                     </div>
                 ))}
             </div>
+
+            {showDots && (
+                <div className={styles.dots}>
+                    {items.map((_, i) => {
+                        const realIndex = realFromVirtual(vIndex);
+                        return (
+                            <span
+                                key={i}
+                                className={`${styles.dot} ${
+                                    realIndex === i ? styles.activeDot : ""
+                                }`}
+                            />
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 });

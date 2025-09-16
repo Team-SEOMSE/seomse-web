@@ -9,7 +9,7 @@
 
 .loginLayout > * {
     width: 100%;
-    max-width: 768px;
+    max-width: 650px;
     height: 100dvh;
 }
 
@@ -24,7 +24,7 @@
 
 .content {
     width: 100%;
-    max-width: 768px;
+    max-width: 650px;
     height: 100dvh;
     position: relative;
     background: #f8f8f8;
