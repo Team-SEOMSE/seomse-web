@@ -4,7 +4,7 @@
 
 .outlet {
     width: 100%;
-    max-width: 768px;
+    max-width: 650px;
     height: 100dvh;
     margin: 0 auto;
 }
