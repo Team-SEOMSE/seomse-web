@@ -1,5 +1,6 @@
 .swiper {
     width: 100%;
+    position: relative;
 }
 
 .track {
@@ -12,6 +13,7 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
+
 .track::-webkit-scrollbar {
     display: none;
 }
@@ -21,6 +23,7 @@
     align-items: center;
     justify-content: center;
     scroll-snap-align: start;
+    position: relative;
 }
 
 .img {
@@ -42,4 +45,25 @@
 .imgNone {
     width: auto;
     height: auto;
+}
+
+.dots {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #cfcfcf;
+    transition: background 0.3s;
+}
+
+.activeDot {
+    background: #353535;
 }

@@ -17,12 +17,11 @@ import styling3 from "../../assets/images/styling3.png";
 import styling4 from "../../assets/images/styling4.png";
 import styling5 from "../../assets/images/styling5.png";
 import styling6 from "../../assets/images/styling6.png";
-
+// import Tabs from "./Tabs";
 import SectionTitle from "../common/sectionTitle/SectionTitle";
 import type { SwiperHandle, SwiperItem } from "../common/swiper/Swiper";
 import Swiper from "../common/swiper/Swiper";
 import styles from "./StyleSwiper.module.css";
-import Tabs from "./Tabs";
 
 const card = (it: SwiperItem) => (
     <article className={styles.card}>
@@ -67,7 +66,7 @@ const StyleSwiper = () => {
 
     return (
         <section className={styles.section}>
-            <Tabs
+            {/* <Tabs
                 items={[
                     { key: "all", label: "전체" },
                     { key: "hippie", label: "히피펌" },
@@ -78,7 +77,8 @@ const StyleSwiper = () => {
                     { key: "layered", label: "레이어드컷" },
                 ]}
                 defaultValue="all"
-            />
+            /> */}
+
             <div className={styles.swiper_section}>
                 <SectionTitle>요즘 핫한 스타일</SectionTitle>
                 <Swiper
