@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGetApi from "../../api/useGetApi";
+import noneIcon from "../../assets/svg/none.svg";
 import SectionTitle from "../common/sectionTitle/SectionTitle";
 import Tabs from "../trend/Tabs";
 import ReservationCard from "./ReservationCard";
@@ -95,7 +96,19 @@ const ReservationDetails = () => {
                         />
                     ))
                 ) : (
-                    <p className={styles.empty}>표시할 예약이 없어요.</p>
+                    <div className={styles.emptyContainer}>
+                        <img
+                            src={noneIcon}
+                            alt="예약 없음"
+                            className={styles.emptyIcon}
+                        />
+                        <p className={styles.emptyTitle}>
+                            등록된 예약이 없습니다.
+                        </p>
+                        <p className={styles.emptyDesc}>
+                            원하는 헤어샵을 찾아 예약해보세요!
+                        </p>
+                    </div>
                 )}
             </div>
         </div>
