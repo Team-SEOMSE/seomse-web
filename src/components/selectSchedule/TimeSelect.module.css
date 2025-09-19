@@ -1,0 +1,44 @@
+.time_container {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.time_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.time_title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #353535;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(180deg);
+}
+
+.time_content {
+    padding-top: 15px;
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+}
+
+@media (max-width: 480px) {
+    .time_container {
+        width: 100%;
+        max-width: 350px;
+    }
+}

@@ -50,6 +50,14 @@ const ReservationDetails = () => {
     const { data } = useGetApi("appointments", "/interaction/appointments");
     const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
 
+    // 최신 날짜순으로 정렬 (내림차순)
+    const sortedList = [...list].sort((a, b) => {
+        return (
+            new Date(b.appointmentDate).getTime() -
+            new Date(a.appointmentDate).getTime()
+        );
+    });
+
     return (
         <div className={styles.screen}>
             <SectionTitle>내 예약</SectionTitle>
@@ -59,8 +67,8 @@ const ReservationDetails = () => {
                 onChange={(k) => setTab(k as typeof tab)}
             />
             <div className={styles.card_wrapper}>
-                {list.length ? (
-                    list.map((it) => (
+                {sortedList.length ? (
+                    sortedList.map((it) => (
                         <ReservationCard
                             key={it.appointmentId}
                             dateTime={formatDateTime(it.appointmentDate)}
