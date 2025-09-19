@@ -1,0 +1,153 @@
+.calendar_container {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.calendar_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.calendar_title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #353535;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.arrow.open {
+    transform: rotate(180deg);
+}
+
+.calendar_navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.nav_buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.nav_btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: background-color 0.2s;
+    border-radius: 4px;
+}
+
+.nav_btn:hover {
+    background-color: #f5f5f5;
+}
+
+.current_month {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+.calendar_weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 10px;
+}
+
+.weekday {
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #9e9e9e;
+    padding: 8px 0;
+    text-transform: uppercase;
+}
+
+.weekday_sunday {
+    color: #ff6b6b;
+}
+
+.weekday_saturday {
+    color: #4dabf7;
+}
+
+.calendar_days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.calendar_day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    border-radius: 8px;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.calendar_day:hover:not(.other_month):not(.disabled) {
+    background-color: #f0f0f0;
+}
+
+.calendar_day_sunday {
+    color: #ff6b6b;
+}
+
+.calendar_day_saturday {
+    color: #4dabf7;
+}
+
+.other_month {
+    color: #ccc;
+    cursor: default;
+}
+
+.selected {
+    background-color: #fff2f5 !important;
+    color: #ff3871;
+    font-weight: 600;
+}
+
+.selected:hover {
+    background-color: #fff2f5;
+}
+
+.today {
+    position: relative;
+}
+
+.disabled {
+    color: #ddd;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+@media (max-width: 480px) {
+    .calendar_container {
+        width: 100%;
+        max-width: 350px;
+    }
+}

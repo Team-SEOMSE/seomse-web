@@ -27,6 +27,7 @@ import AdminLayout from "./pages/adminLayout/AdminLayout";
 import AdminLogin from "./pages/adminLogin/AdminLogin";
 import AdminReservationManagement from "./pages/adminReservationManagement/AdminReservationManagement";
 import AdminReviewManagement from "./pages/adminReviewManagement/AdminReviewManagement";
+import SelectSchedule from "./pages/selectSchedule/SelectSchedule";
 import StylistServiceSelectPage from "./pages/stylistServiceSelect/StylistServiceSelectPage";
 
 const queryClient = new QueryClient();
@@ -44,7 +45,8 @@ const router = createBrowserRouter([
             { path: "oauth/callback", element: <KakaoCallback /> },
             { path: "email-login", element: <EmailLogin /> },
             { path: "user-details", element: <UserDetails /> },
-            { path: "set-schedule", element: <StylistServiceSelectPage /> },
+            { path: "select-service", element: <StylistServiceSelectPage /> },
+            { path: "select-schedule", element: <SelectSchedule /> },
             { path: "reservation-filter", element: <DetailedFilter1 /> },
             { path: "reservation-filter2", element: <DetailedFilter2 /> },
             { path: "reservation-request", element: <DetailedRequest /> },
