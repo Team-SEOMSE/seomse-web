@@ -1,68 +1,78 @@
 .card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 14px 16px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.06);
-  margin-bottom: 12px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 6px 16px rgba(0, 0, 0, 0.06);
+    margin-bottom: 12px;
 }
 
 .top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .dateTime {
-  font-size: 16px;
-  color: #353535;
+    font-size: 16px;
+    color: #353535;
 }
 
 .divider {
-  height: 1px;
-  background: #ffeaf0;
-  margin: 10px 0 12px;
-  border-radius: 2px;
+    height: 1px;
+    background: #e6e6e6;
+    margin: 10px 0 12px;
+    border-radius: 2px;
 }
 
 .row1 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
 }
 
 .title {
-  font-size: 16px;
-  color: #353535;
-  margin: 0;
+    font-size: 16px;
+    color: #353535;
+    margin: 0;
 }
 
 .badge {
-  padding: 4px 10px;
-  border-radius: 9px;
-  background: #ffe6ee;
-  color: #ff3871;
-  font-size: 12px;
-  font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9px;
+    background: #ffe6ee;
+    color: #ff3871;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .row2 {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 6px;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 6px;
+    gap: 8px;
 }
 
 .subtitle {
-  margin: 0;
-  font-size: 14px;
-  color: #9e9e9e;
+    margin: 0;
+    font-size: 14px;
+    color: #9e9e9e;
+}
+
+.review_button {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 8px;
+    background: #353535;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .dday {
-  color: #ff3871;
-  font-size: 14px;
-  font-weight: 600;
-  flex: 0 0 auto;
+    color: #ff3871;
+    font-size: 14px;
+    font-weight: 600;
+    flex: 0 0 auto;
 }

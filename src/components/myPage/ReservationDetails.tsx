@@ -8,93 +8,122 @@ import ReservationCard from "./ReservationCard";
 import styles from "./ReservationDetails.module.css";
 
 interface Appointment {
-    appointmentId: number;
-    appointmentDate: string;
-    serviceName: string;
-    designerNickname: string;
+    appointmentId: string;
     shopName: string;
+    designerNickname: string;
+    serviceName: string;
+    appointmentDate: string;
+    appointmentTime: string;
+    hasReview: boolean;
 }
 
 interface AppointmentsResponse {
     data: Appointment[];
 }
 
-const formatDateTime = (isoString: string) => {
-    const date = new Date(isoString);
-    return date.toLocaleString("ko-KR", {
+const formatDateTime = (date: string, time: string) => {
+    const d = new Date(`${date}T${time}`);
+    return d.toLocaleString("ko-KR", {
         month: "long",
         day: "numeric",
         weekday: "short",
         hour: "numeric",
-        minute: "numeric",
+        minute: "2-digit",
         hour12: true,
     });
 };
 
-const calcDday = (isoString: string) => {
-    const today = new Date();
-    const target = new Date(isoString);
-    today.setHours(0, 0, 0, 0);
-    target.setHours(0, 0, 0, 0);
-    const diff = Math.floor(
-        (target.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-    );
+// 날짜만 비교하기 위해 시간을 자정으로 초기화
+const toMidnight = (d: Date) => {
+    const x = new Date(d);
+    x.setHours(0, 0, 0, 0);
+    return x;
+};
+
+// D-Day 계산 (날짜 기준)
+const calcDday = (dateStr: string) => {
+    const today = toMidnight(new Date());
+    const target = toMidnight(new Date(dateStr));
+    const diff = Math.floor((target.getTime() - today.getTime()) / 86400000);
     if (diff > 0) return `D-${diff}`;
     if (diff === 0) return "D-Day";
     return "완료";
 };
 
+type TabKey = "upcoming" | "past";
+
 const ReservationDetails = () => {
-    const [tab, setTab] = useState<"all">("all");
+    const [tab, setTab] = useState<TabKey>("upcoming");
     const navigate = useNavigate();
+
     const { data } = useGetApi("appointments", "/interaction/appointments");
     const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
 
-    // 최신 날짜순으로 정렬 (내림차순)
-    const sortedList = [...list].sort((a, b) => {
-        return (
-            new Date(b.appointmentDate).getTime() -
-            new Date(a.appointmentDate).getTime()
+    const today = toMidnight(new Date());
+
+    const upcoming = list
+        .filter((a) => toMidnight(new Date(a.appointmentDate)) >= today)
+        .sort(
+            (a, b) =>
+                new Date(a.appointmentDate).getTime() -
+                new Date(b.appointmentDate).getTime()
         );
-    });
+
+    const past = list
+        .filter((a) => toMidnight(new Date(a.appointmentDate)) < today)
+        .sort(
+            (a, b) =>
+                new Date(b.appointmentDate).getTime() -
+                new Date(a.appointmentDate).getTime()
+        );
+
+    const shownList = tab === "upcoming" ? upcoming : past;
+    const isUpcoming = tab === "upcoming";
 
     return (
         <div className={styles.screen}>
             <SectionTitle>내 예약</SectionTitle>
+
             <Tabs
-                items={[{ key: "all", label: "전체" }]}
+                items={[
+                    { key: "upcoming", label: "다가오는 예약" },
+                    { key: "past", label: "지난 예약" },
+                ]}
                 value={tab}
-                onChange={(k) => setTab(k as typeof tab)}
+                onChange={(k) => setTab(k as TabKey)}
             />
+
             <div className={styles.card_wrapper}>
-                {sortedList.length ? (
-                    sortedList.map((it) => (
-                        <ReservationCard
-                            key={it.appointmentId}
-                            dateTime={formatDateTime(it.appointmentDate)}
-                            title={it.serviceName}
-                            subtitle={`${it.designerNickname} 디자이너 | ${it.shopName}`}
-                            status={
-                                calcDday(it.appointmentDate) === "완료"
-                                    ? "방문완료"
-                                    : "방문예정"
-                            }
-                            dday={calcDday(it.appointmentDate)}
-                            onClick={
-                                calcDday(it.appointmentDate) === "완료"
-                                    ? () =>
-                                          navigate(
-                                              `../review/${it.appointmentId}`,
-                                              {
-                                                  state: {
-                                                      salonName: it.shopName,
-                                                  },
-                                              }
-                                          )
-                                    : undefined
-                            }
-                        />
-                    ))
+                {shownList.length ? (
+                    shownList.map((a) => {
+                        const dday = calcDday(a.appointmentDate);
+
+                        return (
+                            <ReservationCard
+                                key={a.appointmentId}
+                                dateTime={formatDateTime(
+                                    a.appointmentDate,
+                                    a.appointmentTime
+                                )}
+                                title={a.serviceName}
+                                subtitle={`${a.designerNickname} 디자이너 | ${a.shopName}`}
+                                status={
+                                    isUpcoming
+                                        ? dday === "완료"
+                                            ? "방문완료"
+                                            : "방문예정"
+                                        : undefined
+                                }
+                                dday={isUpcoming ? dday : undefined}
+                                showReviewButton={!isUpcoming && !a.hasReview}
+                                onReviewClick={() =>
+                                    navigate(`../review/${a.appointmentId}`, {
+                                        state: { salonName: a.shopName },
+                                    })
+                                }
+                            />
+                        );
+                    })
                 ) : (
                     <div className={styles.emptyContainer}>
                         <img
