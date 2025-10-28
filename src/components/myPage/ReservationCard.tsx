@@ -31,8 +31,8 @@ const ReservationCard = ({
             role={onClick ? "button" : undefined}
         >
             <div className={styles.top}>
-                <Clock className={styles.clock} aria-hidden />
-                <span className={styles.dateTime}>{dateTime}</span>
+                <Clock aria-hidden />
+                <span className={styles.date_time}>{dateTime}</span>
             </div>
 
             <div className={styles.divider} />
@@ -53,7 +53,7 @@ const ReservationCard = ({
 
                 <div className={styles.row1}>
                     <h3 className={styles.title}>{title}</h3>
-                    <div className={styles.rightArea}>
+                    <div>
                         {status && (
                             <span className={styles.badge}>{status}</span>
                         )}

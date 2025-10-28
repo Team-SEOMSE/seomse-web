@@ -2,24 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGetApi from "../../api/useGetApi";
 import noneIcon from "../../assets/svg/none.svg";
+import type {
+    Appointment,
+    AppointmentsResponse,
+} from "../../types/myPage/reservationDetails";
 import SectionTitle from "../common/sectionTitle/SectionTitle";
 import Tabs from "../trend/Tabs";
 import ReservationCard from "./ReservationCard";
 import styles from "./ReservationDetails.module.css";
-
-interface Appointment {
-    appointmentId: string;
-    shopName: string;
-    designerNickname: string;
-    serviceName: string;
-    appointmentDate: string;
-    appointmentTime: string;
-    hasReview: boolean;
-}
-
-interface AppointmentsResponse {
-    data: Appointment[];
-}
 
 const formatDateTime = (date: string, time: string) => {
     const d = new Date(`${date}T${time}`);
@@ -60,7 +50,6 @@ const ReservationDetails = () => {
     const list: Appointment[] = (data as AppointmentsResponse)?.data ?? [];
 
     const today = toMidnight(new Date());
-
     const upcoming = list
         .filter((a) => toMidnight(new Date(a.appointmentDate)) >= today)
         .sort(
@@ -125,16 +114,16 @@ const ReservationDetails = () => {
                         );
                     })
                 ) : (
-                    <div className={styles.emptyContainer}>
+                    <div className={styles.empty_container}>
                         <img
                             src={noneIcon}
                             alt="예약 없음"
-                            className={styles.emptyIcon}
+                            className={styles.empty_icon}
                         />
-                        <p className={styles.emptyTitle}>
+                        <p className={styles.empty_title}>
                             등록된 예약이 없습니다.
                         </p>
-                        <p className={styles.emptyDesc}>
+                        <p className={styles.empty_desc}>
                             원하는 헤어샵을 찾아 예약해보세요!
                         </p>
                     </div>
