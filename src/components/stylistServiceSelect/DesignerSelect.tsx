@@ -11,26 +11,41 @@ export type DesignerItem = {
 type Props = {
     items: DesignerItem[];
     title?: string;
+    value?: string;
     onChange?: (id: string) => void;
 };
 
-const DesignerSelect = ({ items, title = "디자이너", onChange }: Props) => {
+const DesignerSelect = ({
+    items,
+    title = "디자이너",
+    value,
+    onChange,
+}: Props) => {
     const [selected, setSelected] = useState<string>(() => items[0]?.id ?? "");
+
+    // value prop이 있으면 제어 컴포넌트로 동작
+    const currentSelected = value !== undefined ? value : selected;
 
     useEffect(() => {
         if (!items.length) {
-            setSelected("");
+            if (value === undefined) setSelected("");
             return;
         }
-        const exists = items.some((it) => it.id === selected);
-        if (!exists) {
-            setSelected(items[0].id);
-            onChange?.(items[0].id);
+
+        // value prop이 없을 때만 내부 state 업데이트
+        if (value === undefined) {
+            const exists = items.some((it) => it.id === selected);
+            if (!exists) {
+                setSelected(items[0].id);
+                onChange?.(items[0].id);
+            }
         }
-    }, [items]);
+    }, [items, value]);
 
     const select = (id: string) => {
-        setSelected(id);
+        if (value === undefined) {
+            setSelected(id);
+        }
         onChange?.(id);
     };
 
@@ -44,7 +59,7 @@ const DesignerSelect = ({ items, title = "디자이너", onChange }: Props) => {
                         key={it.id}
                         type="button"
                         className={`${styles.designer_item} ${
-                            selected === it.id ? styles.is_selected : ""
+                            currentSelected === it.id ? styles.is_selected : ""
                         }`}
                         onClick={() => select(it.id)}
                     >

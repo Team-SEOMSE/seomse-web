@@ -1,18 +1,23 @@
-.bottom_sheet {
+.overlay {
     position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.bottom_sheet {
     background-color: #fff;
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transform: translateY(100%);
-    transition: transform 0.3s ease-out;
+    width: 100%;
     max-width: 650px;
     height: 340px;
-    margin: 0 auto;
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 20px);
+    animation: slideUp 0.3s ease;
 }
 
 .sheet_content {
@@ -103,6 +108,20 @@
     cursor: pointer;
 }
 
-.bottom_sheet.open {
-    transform: translateY(0);
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+    to {
+        background: rgba(0, 0, 0, 0.5);
+    }
 }

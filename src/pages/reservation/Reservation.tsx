@@ -9,13 +9,14 @@ import styles from "./Reservation.module.css";
 const Reservation = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const [showSheet, setShowSheet] = useState<boolean>(
     location.state?.confirmed ?? false
   );
 
   const shopName = location.state?.shopName || "";
   const serviceName = location.state?.serviceName || "";
+  const appointmentDate = location.state?.appointmentDate || "";
+  const appointmentTime = location.state?.appointmentTime || "";
 
   const handleCloseSheet = () => {
     setShowSheet(false);
@@ -34,6 +35,8 @@ const Reservation = () => {
         <ReservationConfirmedSheet
           shopName={shopName}
           serviceName={serviceName}
+          appointmentDate={appointmentDate}
+          appointmentTime={appointmentTime}
           onClose={handleCloseSheet}
         />
       )}

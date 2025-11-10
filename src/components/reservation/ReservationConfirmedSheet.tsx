@@ -4,14 +4,38 @@ import styles from "./ReservationConfirmedSheet.module.css";
 interface ReservationConfirmedSheetProps {
   shopName: string;
   serviceName?: string;
+  appointmentDate?: string;
+  appointmentTime?: string;
   onClose: () => void;
 }
+
+// "2025-09-18" -> "9월 18일"
+const formatDate = (dateStr: string): string => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${month}월 ${day}일`;
+};
+
+// "12:00:00" -> "12:00"
+const formatTime = (timeStr: string): string => {
+  if (!timeStr) return "";
+  const [hour, minute] = timeStr.split(":");
+  return `${hour}:${minute}`;
+};
 
 const ReservationConfirmedSheet = ({
   shopName,
   serviceName,
+  appointmentDate,
+  appointmentTime,
   onClose,
 }: ReservationConfirmedSheetProps) => {
+  const formattedDateTime =
+    appointmentDate && appointmentTime
+      ? `${formatDate(appointmentDate)} ${formatTime(appointmentTime)}`
+      : "";
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.sheet} onClick={(e) => e.stopPropagation()}>
@@ -32,6 +56,9 @@ const ReservationConfirmedSheet = ({
 
         <div className={styles.confirmed_body}>
           <div className={styles.shop_card}>
+            {formattedDateTime && (
+              <p className={styles.datetime}>{formattedDateTime}</p>
+            )}
             <strong>{shopName}</strong>
             {serviceName && <p className={styles.service}>{serviceName}</p>}
           </div>

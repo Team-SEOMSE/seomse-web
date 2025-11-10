@@ -19,7 +19,7 @@ const DetailedRequest = () => {
 
   const { mutate: createReservation } = usePostApi(
     "createReservation",
-    "/interaction/appointments",
+    "/interaction/appointments/special",
     true,
     "multipart"
   );
@@ -29,6 +29,8 @@ const DetailedRequest = () => {
     shopName,
     serviceName,
     designerId,
+    appointmentDate,
+    appointmentTime,
     scaleType,
     hairType,
     hairLength,
@@ -69,9 +71,18 @@ const DetailedRequest = () => {
   const handle_submit = () => {
     const requirements = editorRef.current?.innerText || "";
 
+    // appointmentTime이 "HH:mm" 형식이면 ":00"을 붙여서 "HH:mm:ss" 형식으로 변환
+    const formattedTime = appointmentTime?.includes(":")
+      ? appointmentTime.split(":").length === 2
+        ? `${appointmentTime}:00`
+        : appointmentTime
+      : appointmentTime;
+
     const body: Record<string, unknown> = {
       shopId,
       designerId,
+      appointmentDate,
+      appointmentTime: formattedTime,
       serviceName,
       scaleType,
       hairType,
@@ -93,7 +104,13 @@ const DetailedRequest = () => {
           console.log(data);
           navigate("/reservation", {
             replace: true,
-            state: { confirmed: true, shopName, serviceName },
+            state: {
+              confirmed: true,
+              shopName,
+              serviceName,
+              appointmentDate,
+              appointmentTime,
+            },
           });
         },
         onError: (err) => {
@@ -101,6 +118,7 @@ const DetailedRequest = () => {
         },
       }
     );
+    console.log(body);
   };
 
   return (
