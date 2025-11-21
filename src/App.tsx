@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Root />,
         errorElement: <div>Not Found</div>,
         children: [
-            { index: true, element: <Splash /> },
+            { index: true, element: <Home /> },
             { path: "splash", element: <Splash /> },
             { path: "kakao-login", element: <KakaoLogin /> },
             { path: "oauth/callback", element: <KakaoCallback /> },
@@ -51,9 +51,9 @@ const router = createBrowserRouter([
             { path: "reservation-filter2", element: <DetailedFilter2 /> },
             { path: "reservation-request", element: <DetailedRequest /> },
             { path: "signup", element: <Signup /> },
-            { path: "home", element: <Home /> },
             { path: "trend", element: <Trend /> },
             { path: "reservation", element: <Reservation /> },
+            // ai분석 페이지로 바꾸기
             { path: "saved-styles", element: <Home /> },
             {
                 path: "my-page",

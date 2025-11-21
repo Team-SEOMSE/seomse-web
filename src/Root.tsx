@@ -33,7 +33,7 @@ const Root = () => {
     useEffect(() => {
         if (data) {
             if (isAuthPage) {
-                navigate("/home");
+                navigate("/");
             }
         }
     }, [data, isAuthPage, navigate]);

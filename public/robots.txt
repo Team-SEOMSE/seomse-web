@@ -1,0 +1,32 @@
+# robots.txt for SEOMSE
+User-agent: *
+
+# Admin & internal tools
+Disallow: /admin
+Disallow: /admin/
+
+# Auth & onboarding
+Disallow: /kakao-login
+Disallow: /oauth/
+Disallow: /email-login
+Disallow: /signup
+Disallow: /user-details
+
+# User private / flow pages
+Disallow: /my-page
+Disallow: /my-page/
+Disallow: /select-service
+Disallow: /select-schedule
+Disallow: /reservation-filter
+Disallow: /reservation-filter2
+Disallow: /reservation-request
+Disallow: /saved-styles
+
+# Allow everything else
+Allow: /
+
+# Sitemap
+Sitemap: https://seomse.kro.kr/sitemap.xml
+
+# (Optional) 일부 봇에서만 적용됨
+Crawl-delay: 1
