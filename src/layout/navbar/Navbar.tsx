@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { ReactComponent as AiIcon } from "../../assets/svg/aiAnalysis.svg";
 import { ReactComponent as CalendarIcon } from "../../assets/svg/booking.svg";
-// import { ReactComponent as HeartIcon } from "../../assets/svg/heart.svg";
 import { ReactComponent as HomeIcon } from "../../assets/svg/home.svg";
 import { ReactComponent as UserIcon } from "../../assets/svg/my.svg";
 import { ReactComponent as FireIcon } from "../../assets/svg/trend.svg";
@@ -10,7 +10,7 @@ const TABS = [
     { to: "/", label: "홈", Icon: HomeIcon },
     { to: "/trend", label: "요즘", Icon: FireIcon },
     { to: "/reservation", label: "예약", Icon: CalendarIcon },
-    // { to: "/saved-styles", label: "찜", Icon: HeartIcon },
+    { to: "/ai-analysis", label: "AI 분석", Icon: AiIcon },
     { to: "/my-page", label: "마이", Icon: UserIcon },
 ];
 

@@ -7,6 +7,7 @@ import MyPageSection from "./components/myPage/MyPageSection";
 import ReservationDetails from "./components/myPage/ReservationDetails";
 import ReviewDone from "./components/myPage/ReviewDone";
 import ReviewWrite from "./components/myPage/ReviewWrite";
+import AiAnalysis from "./pages/aiAnalysis/AiAnalysis";
 import DetailedFilter1 from "./pages/detailedFilter/DetailedFilter1";
 import DetailedFilter2 from "./pages/detailedFilter/DetailedFilter2";
 import DetailedRequest from "./pages/detailedFilter/DetailedRequest";
@@ -53,8 +54,7 @@ const router = createBrowserRouter([
             { path: "signup", element: <Signup /> },
             { path: "trend", element: <Trend /> },
             { path: "reservation", element: <Reservation /> },
-            // ai분석 페이지로 바꾸기
-            { path: "saved-styles", element: <Home /> },
+            { path: "ai-analysis", element: <AiAnalysis /> },
             {
                 path: "my-page",
                 element: <MyPageShell />,
