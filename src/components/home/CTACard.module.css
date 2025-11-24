@@ -1,0 +1,54 @@
+.card {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    font-family: "SUITE";
+}
+
+.bg {
+    width: 100%;
+}
+
+.inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 12px;
+}
+
+.left_img {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.right_content {
+    max-width: 220px;
+}
+
+.right_content h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+    color: #1a1a1a;
+}
+
+.right_content p {
+    font-size: 12px;
+    margin-bottom: 16px;
+    color: #575757;
+    line-height: 15px;
+}
+
+.button {
+    background: linear-gradient(180deg, #ff3871 0%, #ff3d9d 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 6px 16px;
+    cursor: pointer;
+    font-size: 12px;
+    font-family: "SUITE";
+}
