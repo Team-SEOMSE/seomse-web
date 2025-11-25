@@ -1,0 +1,24 @@
+.box {
+    width: 335px;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+.title {
+    font-size: 16px;
+    color: #353535;
+    font-weight: 600;
+}
+
+.list {
+    padding-left: 20px;
+}
+
+.list li {
+    color: #787878;
+    font-size: 14px;
+    line-height: 1.5;
+}

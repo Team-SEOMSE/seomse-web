@@ -1,0 +1,12 @@
+.section h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-top: 20px;
+}
+
+.section p {
+    font-size: 14px;
+    color: #353535;
+    margin-bottom: 12px;
+}
