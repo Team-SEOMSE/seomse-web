@@ -14,7 +14,6 @@ const AiAnalysis = () => {
                     src={exampleFace}
                     alt="example face"
                 />
-
                 <ImgUpload />
             </div>
             <Navbar />

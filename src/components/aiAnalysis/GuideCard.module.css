@@ -1,5 +1,5 @@
 .box {
-    width: 335px;
+    min-width: 335px;
     border-radius: 12px;
     padding: 16px 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);

@@ -1,3 +1,7 @@
+.container {
+    width: 100%;
+}
+
 .section h1 {
     font-size: 18px;
     font-weight: 600;
@@ -9,4 +13,10 @@
     font-size: 14px;
     color: #353535;
     margin-bottom: 12px;
+}
+
+@media (min-width: 450px) {
+    .section {
+        margin-top: 50px;
+    }
 }

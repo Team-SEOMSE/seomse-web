@@ -16,7 +16,7 @@ const ImgUpload = () => {
         content: "이미지 업로드 하기",
     };
     return (
-        <div>
+        <div className={styles.container}>
             <GuideCard />
             <div className={styles.section}>
                 <h1>섬세의 헤어 AI분석</h1>

@@ -16,9 +16,10 @@
     align-items: center;
     padding: 20px;
     width: 100%;
+    max-width: 550px;
     box-sizing: border-box;
 }
 
 .example_img {
-    max-width: 335px;
+    width: 100%;
 }
