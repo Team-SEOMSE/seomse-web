@@ -18,11 +18,10 @@ const EventBanner = () => {
                 items={[
                     { src: banner5, alt: "new feature" },
                     { src: banner4, alt: "mvp banner" },
-                    { src: banner1, alt: "event 2" },
-                    { src: banner2, alt: "event 3" },
-                    { src: banner3, alt: "event 4" },
+                    { src: banner3, alt: "event 3" },
+                    { src: banner1, alt: "event 1" },
+                    { src: banner2, alt: "event 2" },
                 ]}
-                loop
                 autoPlayMs={null}
                 aspect="auto"
                 fit="contain"
