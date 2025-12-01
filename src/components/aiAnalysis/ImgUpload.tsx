@@ -9,16 +9,31 @@ import type {
     AnalysisResponse,
     UserResponse,
 } from "../../types/aiAnalysis/imageUpload";
-import type { ButtonElements, ButtonStyles } from "../../types/common/button";
+import type { ButtonStyles } from "../../types/common/button";
 import Button from "../common/button/Button";
 import GuideCard from "./GuideCard";
 import styles from "./ImgUpload.module.css";
+import ResultSection from "./ResultSection";
 
-const STYLE: ButtonStyles = {
+const uploadButtonStyle: ButtonStyles = {
     backgroundColor: "#ffffff",
     border: "1px solid #FF3871",
-    fontWeight: 600,
+    fontWeight: 500,
     color: "#FF3871",
+};
+
+const reuploadButtonStyle: ButtonStyles = {
+    backgroundColor: "#e6e6e6",
+    border: "none",
+    fontWeight: 500,
+    color: "#787878",
+};
+
+const applyButtonStyle: ButtonStyles = {
+    backgroundColor: "#FF3871",
+    border: "none",
+    fontWeight: 500,
+    color: "#ffffff",
 };
 
 const ImgUpload = () => {
@@ -56,21 +71,14 @@ const ImgUpload = () => {
             },
             {
                 onSuccess: (data) => {
-                    console.log("AI 분석 응답:", data);
                     setAnalysisResult(data as AnalysisResponse);
                 },
                 onError: (error) => {
-                    console.error("AI 분석 에러:", error);
+                    console.error(error);
                 },
             }
         );
-
         e.target.value = "";
-    };
-
-    const buttonElements: ButtonElements = {
-        content: "이미지 업로드 하기",
-        handleClick: handleButtonClick,
     };
 
     if (isPending) {
@@ -105,27 +113,40 @@ const ImgUpload = () => {
                         alt="uploaded face"
                     />
                 )}
+
                 <h1>
                     {userName}님, {analysis.faceShape}에{" "}
-                    {analysis.personalColor}!
+                    {analysis.personalColor}이에요!
                 </h1>
-                <div className={styles.result_section}>
-                    <h2 className={styles.result_subtitle}>추천 헤어 컬러</h2>
-                    <p className={styles.result_name}>
-                        {recommendations.hairColor.name}
-                    </p>
-                    <p className={styles.result_description}>
-                        {recommendations.hairColor.reason}
-                    </p>
-                </div>
-                <div className={styles.result_section}>
-                    <h2 className={styles.result_subtitle}>추천 헤어 스타일</h2>
-                    <p className={styles.result_name}>
-                        {recommendations.hairstyle.name}
-                    </p>
-                    <p className={styles.result_description}>
-                        {recommendations.hairstyle.reason}
-                    </p>
+
+                <ResultSection
+                    title="추천 헤어 컬러"
+                    name={recommendations.hairColor.name}
+                    description={recommendations.hairColor.reason}
+                />
+                <ResultSection
+                    title="추천 헤어 스타일"
+                    name={recommendations.hairstyle.name}
+                    description={recommendations.hairstyle.reason}
+                />
+
+                <div className={styles.button_wrapper}>
+                    <Button
+                        elements={{
+                            content: "이미지 재업로드",
+                            handleClick: handleButtonClick,
+                        }}
+                        style={reuploadButtonStyle}
+                        disabled={isPending}
+                    />
+                    <Button
+                        elements={{
+                            content: "AI 스타일 적용",
+                            handleClick: handleButtonClick,
+                        }}
+                        style={applyButtonStyle}
+                        disabled={isPending}
+                    />
                 </div>
             </div>
         );
@@ -150,8 +171,11 @@ const ImgUpload = () => {
                     style={{ display: "none" }}
                 />
                 <Button
-                    elements={buttonElements}
-                    style={STYLE}
+                    elements={{
+                        content: "이미지 업로드 하기",
+                        handleClick: handleButtonClick,
+                    }}
+                    style={uploadButtonStyle}
                     icon={<Edit />}
                     disabled={isPending}
                 />

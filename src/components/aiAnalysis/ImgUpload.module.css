@@ -1,6 +1,7 @@
 .container {
     width: 100%;
 }
+
 .example_img {
     width: 100%;
 }
@@ -16,12 +17,6 @@
     font-size: 14px;
     color: #353535;
     margin-bottom: 12px;
-}
-
-@media (min-width: 450px) {
-    .section {
-        margin-top: 50px;
-    }
 }
 
 .loading_container {
@@ -59,35 +54,20 @@
 }
 
 .result_container h1 {
+    text-align: center;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     color: #1a1a1a;
     margin-bottom: 24px;
 }
 
-.result_section {
-    margin-bottom: 20px;
-    padding: 16px;
-    background: #f9f9f9;
-    border-radius: 12px;
+.button_wrapper {
+    display: flex;
+    gap: 7px;
 }
 
-.result_subtitle {
-    font-size: 14px;
-    font-weight: 600;
-    color: #ff3871;
-    margin-bottom: 8px;
-}
-
-.result_name {
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 8px;
-}
-
-.result_description {
-    font-size: 14px;
-    color: #353535;
-    line-height: 1.6;
+@media (min-width: 450px) {
+    .section {
+        margin-top: 50px;
+    }
 }
