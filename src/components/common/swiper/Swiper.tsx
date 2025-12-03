@@ -208,6 +208,7 @@ const Swiper = forwardRef<SwiperHandle, SwiperProps>(function Swiper(
                                 }`}
                                 src={it.src}
                                 alt={it.alt ?? it.title ?? `slide ${i + 1}`}
+                                loading="lazy"
                             />
                         )}
                     </div>

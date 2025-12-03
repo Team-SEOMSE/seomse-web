@@ -1,22 +1,22 @@
 import { useRef } from "react";
-import influencer from "../../assets/images/influencer.png";
-import influencer2 from "../../assets/images/influencer2.png";
-import influencer3 from "../../assets/images/influencer3.png";
-import influencer4 from "../../assets/images/influencer4.png";
-import influencer5 from "../../assets/images/influencer5.png";
-import influencer6 from "../../assets/images/influencer6.png";
+import influencer from "../../assets/images/influencer.webp";
+import influencer2 from "../../assets/images/influencer2.webp";
+import influencer3 from "../../assets/images/influencer3.webp";
+import influencer4 from "../../assets/images/influencer4.webp";
+import influencer5 from "../../assets/images/influencer5.webp";
+import influencer6 from "../../assets/images/influencer6.webp";
 import instaProfile from "../../assets/images/instaProfile.png";
 import instaProfile2 from "../../assets/images/instaProfile2.png";
 import instaProfile3 from "../../assets/images/instaProfile3.png";
 import instaProfile4 from "../../assets/images/instaProfile4.png";
 import instaProfile5 from "../../assets/images/instaProfile5.png";
 import instaProfile6 from "../../assets/images/instaProfile6.png";
-import styling from "../../assets/images/styling.png";
-import styling2 from "../../assets/images/styling2.png";
-import styling3 from "../../assets/images/styling3.png";
-import styling4 from "../../assets/images/styling4.png";
-import styling5 from "../../assets/images/styling5.png";
-import styling6 from "../../assets/images/styling6.png";
+import styling from "../../assets/images/styling.webp";
+import styling2 from "../../assets/images/styling2.webp";
+import styling3 from "../../assets/images/styling3.webp";
+import styling4 from "../../assets/images/styling4.webp";
+import styling5 from "../../assets/images/styling5.webp";
+import styling6 from "../../assets/images/styling6.webp";
 // import Tabs from "./Tabs";
 import SectionTitle from "../common/sectionTitle/SectionTitle";
 import type { SwiperHandle, SwiperItem } from "../common/swiper/Swiper";
@@ -29,6 +29,7 @@ const card = (it: SwiperItem) => (
             className={styles.cardImg}
             src={it.src}
             alt={it.alt ?? it.title ?? ""}
+            loading="lazy"
         />
         <div className={styles.grad} />
         <div className={styles.meta}>
@@ -44,6 +45,7 @@ const influencerCard = (it: SwiperItem) => (
             className={styles.influencerImg}
             src={it.src}
             alt={it.alt ?? it.name ?? ""}
+            loading="lazy"
         />
         <div className={styles.grad} />
         <div className={styles.infMeta}>
@@ -53,6 +55,7 @@ const influencerCard = (it: SwiperItem) => (
                         className={styles.badgeImg}
                         src={it.avatarSrc}
                         alt={it.name ?? "avatar"}
+                        loading="lazy"
                     />
                 </span>
             )}

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { CLIENT_PATH } from "../../api/URL";
 import useGetApi from "../../api/useGetApi";
 import usePostApi from "../../api/usePostApi";
-import exampleFace from "../../assets/images/exampleFace.png";
+import exampleFace from "../../assets/images/exampleFace.webp";
 import { ReactComponent as Edit } from "../../assets/svg/edit.svg";
 import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
 import type {
@@ -158,6 +158,7 @@ const ImgUpload = () => {
                 className={styles.example_img}
                 src={exampleFace}
                 alt="example face"
+                loading="lazy"
             />
             <GuideCard />
             <div className={styles.section}>
