@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import faceImg from "../../assets/images/beforeAfter.png";
-import designedBg from "../../assets/images/designedBg.png";
+import faceImg from "../../assets/images/beforeAfter.webp";
+import designedBg from "../../assets/images/designedBg.webp";
 import styles from "./CTACard.module.css";
 
 const CTACard = () => {
@@ -12,6 +12,7 @@ const CTACard = () => {
                 className={styles.bg}
                 src={designedBg}
                 alt="AI 헤어분석 배너"
+                loading="lazy"
             />
 
             <div className={styles.inner}>
@@ -19,6 +20,7 @@ const CTACard = () => {
                     className={styles.left_img}
                     src={faceImg}
                     alt="Before After"
+                    loading="lazy"
                 />
 
                 <div className={styles.right_content}>

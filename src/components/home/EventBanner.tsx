@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import banner1 from "../../assets/images/banner1.png";
-import banner2 from "../../assets/images/banner2.png";
-import banner3 from "../../assets/images/banner3.png";
-import banner4 from "../../assets/images/banner4.png";
+import banner1 from "../../assets/images/banner1.webp";
+import banner2 from "../../assets/images/banner2.webp";
+import banner3 from "../../assets/images/banner3.webp";
+import banner4 from "../../assets/images/banner4.webp";
 import banner5 from "../../assets/images/banner5.png";
 import type { SwiperHandle } from "../common/swiper/Swiper";
 import Swiper from "../common/swiper/Swiper";

@@ -1,174 +1,174 @@
 .section {
-  padding: 0 20px 38px 20px;
-  box-sizing: border-box;
+    padding: 0 20px 45px 20px;
+    box-sizing: border-box;
 }
 
 .aiTitleContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .recInfo {
-  background: linear-gradient(90deg, #ff3871 0%, #ff6b9a 100%);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 600;
+    background: linear-gradient(90deg, #ff3871 0%, #ff6b9a 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .gap_box {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .cardFill {
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  aspect-ratio: 9 / 12;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 9 / 12;
 }
 
 .cardImg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 20px;
 }
 
 .recBadge {
-  position: absolute;
-  left: 8px;
-  top: 8px;
-  padding: 4px 8px;
-  font-size: 12px;
-  background: #ffffff;
-  opacity: 0.8;
-  color: #111111;
-  border-radius: 8px;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    padding: 4px 8px;
+    font-size: 12px;
+    background: #ffffff;
+    opacity: 0.8;
+    color: #111111;
+    border-radius: 8px;
 }
 
 .shopCard {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap: 8px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 8px;
 }
 
 .shopMedia {
-  width: 100%;
-  aspect-ratio: 21 / 15;
-  overflow: hidden;
-  border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 21 / 15;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
 .shopImg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .shopInfoBelow {
-  padding: 0 4px;
-  line-height: 20px;
+    padding: 0 4px;
+    line-height: 20px;
 }
 
 .pref {
-  background: #fff2f5;
-  border-radius: 4px;
-  padding: 4px 6px;
-  font-size: 12px;
-  color: #ff3871;
-  font-weight: 600;
+    background: #fff2f5;
+    border-radius: 4px;
+    padding: 4px 6px;
+    font-size: 12px;
+    color: #ff3871;
+    font-weight: 600;
 }
 
 .title {
-  font-weight: 600;
-  font-size: 14px;
-  margin-top: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 8px;
 }
 
 .sub {
-  font-weight: 400;
-  font-size: 14px;
-  color: #9e9e9e;
+    font-weight: 400;
+    font-size: 14px;
+    color: #9e9e9e;
 }
 
 .designerCard {
-  width: 100%;
+    width: 100%;
 }
 
 .designerMedia {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 13 / 16;
-  border-radius: 16px;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 13 / 16;
+    border-radius: 16px;
+    overflow: hidden;
 }
 
 .designerImg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
 }
 
 .designerTop {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-  line-height: 1.5;
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    line-height: 1.5;
 }
 
 .branch {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .shopName {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 .designerBubble {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 12px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
 }
 
 .avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 36px;
 }
 
 .bubbleText {
-  display: grid;
-  gap: 2px;
+    display: grid;
+    gap: 2px;
 }
 
 .designerName {
-  font-size: 14px;
-  color: #1a1a1a;
+    font-size: 14px;
+    color: #1a1a1a;
 }
 
 .designerTags {
-  font-size: 12px;
-  color: #787878;
+    font-size: 12px;
+    color: #787878;
 }
