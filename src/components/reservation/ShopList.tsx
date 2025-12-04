@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useGetApi from "../../api/useGetApi";
-import bestShop from "../../assets/images/bestShop.png"; // 이미지가 없는 매장 대비
+import bestShop from "../../assets/images/bestShop.webp"; // 이미지가 없는 매장 대비
 import { ReactComponent as Tag } from "../../assets/svg/tagIcon.svg";
 import {
   Designer,
@@ -83,7 +83,7 @@ const ShopList = () => {
   ) => (
     <div className={styles.shop_card} onClick={() => openBottomSheet(it)}>
       <div className={styles.shop_media}>
-        <img className={styles.shop_img} src={it.src} alt={it.title} />
+        <img className={styles.shop_img} src={it.src} alt={it.title} loading="lazy" />
         {isFirstSwiper && index === 0 && (
           <span className={styles.best_tag}>
             <Tag />
