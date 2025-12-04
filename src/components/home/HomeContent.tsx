@@ -1,12 +1,12 @@
 import { CLIENT_PATH } from "../../api/URL";
 import useGetApi from "../../api/useGetApi";
-import bestShop from "../../assets/images/bestShop.webp";
-import bestShop1 from "../../assets/images/bestShop1.webp";
-import bestShop2 from "../../assets/images/bestShop2.webp";
-import bestShop3 from "../../assets/images/bestShop3.webp";
-import popular1 from "../../assets/images/popular1.webp";
-import popular2 from "../../assets/images/popular2.webp";
-import popular3 from "../../assets/images/popular3.webp";
+import bestShop from "../../assets/images/bestShop.png";
+import bestShop1 from "../../assets/images/bestShop1.png";
+import bestShop2 from "../../assets/images/bestShop2.png";
+import bestShop3 from "../../assets/images/bestShop3.png";
+import popular1 from "../../assets/images/popular1.png";
+import popular2 from "../../assets/images/popular2.png";
+import popular3 from "../../assets/images/popular3.png";
 import profile from "../../assets/images/profile.png";
 import profile2 from "../../assets/images/profile2.png";
 import profile3 from "../../assets/images/profile3.png";
@@ -125,7 +125,6 @@ const HomeContent = () => {
                                     className={styles.shopImg}
                                     src={it.src}
                                     alt={it.title}
-                                    loading="lazy"
                                 />
                             </div>
                             <div className={styles.shopInfoBelow}>
@@ -154,7 +153,6 @@ const HomeContent = () => {
                                     className={styles.designerImg}
                                     src={it.src}
                                     alt={it.title}
-                                    loading="lazy"
                                 />
 
                                 <div className={styles.designerTop}>
@@ -171,7 +169,6 @@ const HomeContent = () => {
                                         className={styles.avatar}
                                         src={it.avatarSrc ?? it.src}
                                         alt=""
-                                        loading="lazy"
                                     />
                                     <div className={styles.bubbleText}>
                                         <div className={styles.designerName}>

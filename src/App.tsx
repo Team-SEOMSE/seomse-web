@@ -1,83 +1,35 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./Root";
 
+// --- User pages ---
+import MyPageSection from "./components/myPage/MyPageSection";
+import ReservationDetails from "./components/myPage/ReservationDetails";
+import ReviewDone from "./components/myPage/ReviewDone";
+import ReviewWrite from "./components/myPage/ReviewWrite";
+import AiAnalysis from "./pages/aiAnalysis/AiAnalysis";
+import DetailedFilter1 from "./pages/detailedFilter/DetailedFilter1";
+import DetailedFilter2 from "./pages/detailedFilter/DetailedFilter2";
+import DetailedRequest from "./pages/detailedFilter/DetailedRequest";
+import EmailLogin from "./pages/emailLogin/EmailLogin";
 import Home from "./pages/home/Home";
+import MyPageShell from "./pages/myPage/MyPageShell";
+import MyPageWithNav from "./pages/myPage/MyPageWithNav";
+import Reservation from "./pages/reservation/Reservation";
+import Signup from "./pages/signup/Signup";
+import KakaoCallback from "./pages/socialLogin/KakaoCallback";
+import KakaoLogin from "./pages/socialLogin/KakaoLogin";
 import Splash from "./pages/splash/Splash";
-const Trend = lazy(() => import("./pages/trend/Trend"));
-const AiAnalysis = lazy(() => import("./pages/aiAnalysis/AiAnalysis"));
-const Reservation = lazy(() => import("./pages/reservation/Reservation"));
-const KakaoLogin = lazy(() => import("./pages/socialLogin/KakaoLogin"));
-const KakaoCallback = lazy(() => import("./pages/socialLogin/KakaoCallback"));
-const EmailLogin = lazy(() => import("./pages/emailLogin/EmailLogin"));
-const Signup = lazy(() => import("./pages/signup/Signup"));
-const UserDetails = lazy(() => import("./pages/userDetails/UserDetails"));
-const StylistServiceSelectPage = lazy(
-    () => import("./pages/stylistServiceSelect/StylistServiceSelectPage")
-);
-const SelectSchedule = lazy(
-    () => import("./pages/selectSchedule/SelectSchedule")
-);
-const DetailedFilter1 = lazy(
-    () => import("./pages/detailedFilter/DetailedFilter1")
-);
-const DetailedFilter2 = lazy(
-    () => import("./pages/detailedFilter/DetailedFilter2")
-);
-const DetailedRequest = lazy(
-    () => import("./pages/detailedFilter/DetailedRequest")
-);
-const MyPageShell = lazy(() => import("./pages/myPage/MyPageShell"));
-const MyPageWithNav = lazy(() => import("./pages/myPage/MyPageWithNav"));
-const MyPageSection = lazy(() => import("./components/myPage/MyPageSection"));
-const ReservationDetails = lazy(
-    () => import("./components/myPage/ReservationDetails")
-);
-const ReviewWrite = lazy(() => import("./components/myPage/ReviewWrite"));
-const ReviewDone = lazy(() => import("./components/myPage/ReviewDone"));
-const AdminLayout = lazy(() => import("./pages/adminLayout/AdminLayout"));
-const AdminLogin = lazy(() => import("./pages/adminLogin/AdminLogin"));
-const AdminReservationManagement = lazy(
-    () =>
-        import("./pages/adminReservationManagement/AdminReservationManagement")
-);
-const AdminReviewManagement = lazy(
-    () => import("./pages/adminReviewManagement/AdminReviewManagement")
-);
+import Trend from "./pages/trend/Trend";
+import UserDetails from "./pages/userDetails/UserDetails";
 
-// Suspense fallback 컴포넌트
-const PageLoader = () => (
-    <div
-        style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100vh",
-        }}
-    >
-        <div
-            style={{
-                width: 40,
-                height: 40,
-                border: "3px solid #f3f3f3",
-                borderTop: "3px solid #FF3871",
-                borderRadius: "50%",
-                animation: "spin 1s linear infinite",
-            }}
-        />
-        <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
-    </div>
-);
-
-// lazy 컴포넌트를 Suspense로 감싸는 헬퍼
-const withSuspense = (
-    Component: React.LazyExoticComponent<React.ComponentType>
-) => (
-    <Suspense fallback={<PageLoader />}>
-        <Component />
-    </Suspense>
-);
+// --- Admin pages ---
+import AdminLayout from "./pages/adminLayout/AdminLayout";
+import AdminLogin from "./pages/adminLogin/AdminLogin";
+import AdminReservationManagement from "./pages/adminReservationManagement/AdminReservationManagement";
+import AdminReviewManagement from "./pages/adminReviewManagement/AdminReviewManagement";
+import SelectSchedule from "./pages/selectSchedule/SelectSchedule";
+import StylistServiceSelectPage from "./pages/stylistServiceSelect/StylistServiceSelectPage";
 
 const queryClient = new QueryClient();
 
@@ -90,53 +42,38 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> },
             { path: "splash", element: <Splash /> },
-            { path: "kakao-login", element: withSuspense(KakaoLogin) },
-            { path: "oauth/callback", element: withSuspense(KakaoCallback) },
-            { path: "email-login", element: withSuspense(EmailLogin) },
-            { path: "user-details", element: withSuspense(UserDetails) },
-            {
-                path: "select-service",
-                element: withSuspense(StylistServiceSelectPage),
-            },
-            { path: "select-schedule", element: withSuspense(SelectSchedule) },
-            {
-                path: "reservation-filter",
-                element: withSuspense(DetailedFilter1),
-            },
-            {
-                path: "reservation-filter2",
-                element: withSuspense(DetailedFilter2),
-            },
-            {
-                path: "reservation-request",
-                element: withSuspense(DetailedRequest),
-            },
-            { path: "signup", element: withSuspense(Signup) },
-            { path: "trend", element: withSuspense(Trend) },
-            { path: "reservation", element: withSuspense(Reservation) },
-            { path: "ai-analysis", element: withSuspense(AiAnalysis) },
+            { path: "kakao-login", element: <KakaoLogin /> },
+            { path: "oauth/callback", element: <KakaoCallback /> },
+            { path: "email-login", element: <EmailLogin /> },
+            { path: "user-details", element: <UserDetails /> },
+            { path: "select-service", element: <StylistServiceSelectPage /> },
+            { path: "select-schedule", element: <SelectSchedule /> },
+            { path: "reservation-filter", element: <DetailedFilter1 /> },
+            { path: "reservation-filter2", element: <DetailedFilter2 /> },
+            { path: "reservation-request", element: <DetailedRequest /> },
+            { path: "signup", element: <Signup /> },
+            { path: "trend", element: <Trend /> },
+            { path: "reservation", element: <Reservation /> },
+            { path: "ai-analysis", element: <AiAnalysis /> },
             {
                 path: "my-page",
-                element: withSuspense(MyPageShell),
+                element: <MyPageShell />,
                 children: [
                     {
-                        element: withSuspense(MyPageWithNav),
+                        element: <MyPageWithNav />,
                         children: [
-                            {
-                                index: true,
-                                element: withSuspense(MyPageSection),
-                            },
+                            { index: true, element: <MyPageSection /> },
                             {
                                 path: "reservations",
-                                element: withSuspense(ReservationDetails),
+                                element: <ReservationDetails />,
                             },
                         ],
                     },
                     {
                         path: "review/:id",
                         children: [
-                            { index: true, element: withSuspense(ReviewWrite) },
-                            { path: "done", element: withSuspense(ReviewDone) },
+                            { index: true, element: <ReviewWrite /> },
+                            { path: "done", element: <ReviewDone /> },
                         ],
                     },
                 ],
@@ -147,14 +84,11 @@ const router = createBrowserRouter([
     // --- 어드민 전용 ---
     {
         path: "/admin",
-        element: withSuspense(AdminLayout),
+        element: <AdminLayout />,
         children: [
-            { index: true, element: withSuspense(AdminLogin) },
-            {
-                path: "reservations",
-                element: withSuspense(AdminReservationManagement),
-            },
-            { path: "reviews", element: withSuspense(AdminReviewManagement) },
+            { index: true, element: <AdminLogin /> },
+            { path: "reservations", element: <AdminReservationManagement /> },
+            { path: "reviews", element: <AdminReviewManagement /> },
         ],
     },
 ]);
