@@ -1,10 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CLIENT_PATH } from "../../api/URL";
 import useGetApi from "../../api/useGetApi";
 import usePostApi from "../../api/usePostApi";
 import exampleFace from "../../assets/images/exampleFace.webp";
 import { ReactComponent as Edit } from "../../assets/svg/edit.svg";
 import { ReactComponent as Loading } from "../../assets/svg/loading.svg";
+import BackHeader from "../../layout/backHeader/BackHeader";
 import type {
     AnalysisResponse,
     UserResponse,
@@ -14,6 +16,10 @@ import Button from "../common/button/Button";
 import GuideCard from "./GuideCard";
 import styles from "./ImgUpload.module.css";
 import ResultSection from "./ResultSection";
+
+type ImgUploadProps = {
+    setHideHeader: (hidden: boolean) => void;
+};
 
 const uploadButtonStyle: ButtonStyles = {
     backgroundColor: "#ffffff",
@@ -36,11 +42,12 @@ const applyButtonStyle: ButtonStyles = {
     color: "#ffffff",
 };
 
-const ImgUpload = () => {
+const ImgUpload = ({ setHideHeader }: ImgUploadProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [analysisResult, setAnalysisResult] =
         useState<AnalysisResponse | null>(null);
     const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const { data: userData } = useGetApi("userInfo", `${CLIENT_PATH}/me`);
     const userName = (userData as UserResponse)?.data?.name || "고객";
@@ -52,6 +59,14 @@ const ImgUpload = () => {
         "multipart"
     );
 
+    useEffect(() => {
+        if (analysisResult !== null || isPending) {
+            setHideHeader(true);
+        } else {
+            setHideHeader(false);
+        }
+    }, [analysisResult, isPending, setHideHeader]);
+
     const handleButtonClick = () => {
         fileInputRef.current?.click();
     };
@@ -60,6 +75,16 @@ const ImgUpload = () => {
         setAnalysisResult(null);
         setUploadedImage(null);
         fileInputRef.current?.click();
+    };
+
+    const handleApplyClick = () => {
+        navigate("/ai-analysis/result", {
+            state: {
+                // 적용된 이미지 관련 api 나오면 수정 필요
+                uploadedImage,
+                analysisResult,
+            },
+        });
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +115,7 @@ const ImgUpload = () => {
     if (isPending) {
         return (
             <div className={styles.container}>
+                <BackHeader />
                 {uploadedImage && (
                     <img
                         className={styles.example_img}
@@ -112,6 +138,7 @@ const ImgUpload = () => {
         const { analysis, recommendations } = analysisResult.data;
         return (
             <div className={styles.result_container}>
+                <BackHeader />
                 {uploadedImage && (
                     <img
                         className={styles.example_img}
@@ -148,7 +175,7 @@ const ImgUpload = () => {
                     <Button
                         elements={{
                             content: "AI 스타일 적용",
-                            handleClick: handleButtonClick,
+                            handleClick: handleApplyClick,
                         }}
                         style={applyButtonStyle}
                         disabled={isPending}
