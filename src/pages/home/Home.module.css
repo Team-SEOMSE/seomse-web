@@ -4,13 +4,12 @@
     align-items: center;
     background: #ffffff;
     height: 100vh;
-    padding-top: 60px;
-    padding-bottom: 100px;
     box-sizing: border-box;
 }
 
 .content {
     overflow-y: auto;
+    padding: 70px 0 100px 0;
 }
 
 .devider {
