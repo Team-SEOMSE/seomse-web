@@ -56,6 +56,12 @@ const ImgUpload = () => {
         fileInputRef.current?.click();
     };
 
+    const handleReuploadClick = () => {
+        setAnalysisResult(null);
+        setUploadedImage(null);
+        fileInputRef.current?.click();
+    };
+
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
@@ -134,7 +140,7 @@ const ImgUpload = () => {
                     <Button
                         elements={{
                             content: "이미지 재업로드",
-                            handleClick: handleButtonClick,
+                            handleClick: handleReuploadClick,
                         }}
                         style={reuploadButtonStyle}
                         disabled={isPending}
