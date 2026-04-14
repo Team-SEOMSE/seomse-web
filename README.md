@@ -11,13 +11,17 @@
 ## 목차
 1. [팀원 소개](#1-팀원-소개)
 2. [기여도](#2-기여도)
-3. [기술 및 개발 환경](#3-기술-및-개발환경)
+3. [기술 및 개발환경](#3-기술-및-개발환경)
 4. [폴더 구조](#4-폴더-구조)
 5. [주요 기능](#5-주요-기능)
-6. [UI](#6-ui)
-7. [페이지 기능](#7-페이지-기능)
+6. [페이지 기능](#6-페이지-기능)
+   - [사용자 인증](#6-1-사용자-인증)
+   - [홈 / 탐색](#6-2-홈--탐색)
+   - [예약 / 리뷰 / 마이페이지](#6-3-예약--리뷰--마이페이지)
+   - [관리자 기능](#6-4-관리자-기능)
 
-</br> 
+</br>
+
 
 ## 1. 팀원 소개
 |**김소진**|**민건호**|
@@ -27,10 +31,11 @@
 
 </br> 
 
+
 ## 2. 기여도
 <img width="5760" height="3240" alt="role" src="https://github.com/user-attachments/assets/f5d64073-cff8-438b-ab94-a77f80fc8862" />
 
-
+</br>
 
 </br> 
 
@@ -191,7 +196,73 @@
 </br>
 
 
+## 6. 페이지 기능
 
+### 6-1. 사용자 인증
+
+<table>
+  <tr>
+    <td align="center"><b>스플래시</b></td>
+    <td align="center"><b>로그인</b></td>
+    <td align="center"><b>회원가입</b></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f1f0e18b-654a-4079-886c-f6ab766a8434" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/b7e37aed-0e66-4d92-9cdf-16598ab48d44" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/1a579646-2b39-4de9-a37e-307ffab932bf" width="100%"/></td>
+  </tr>
+</table>
+
+</br>
+
+### 6-2. 홈 / 탐색
+
+<table>
+  <tr>
+    <td align="center"><b>홈</b></td>
+    <td align="center"><b>트렌드 / 요즘</b></td>
+    <td align="center"><b>섬세한 예약</b></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/af81def4-4047-4dbf-8e71-7814d98dc001" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/95243441-fa0a-454c-b5cb-e42d47b2cab7" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/6ea7ba26-e80b-43fb-9852-6412cf977b18" width="100%"/></td>
+  </tr>
+</table>
+
+</br>
+
+### 6-3. 예약 / 리뷰 / 마이페이지
+
+<table>
+  <tr>
+    <td align="center"><b>일반 예약</b></td>
+    <td align="center"><b>마이페이지</b></td>
+    <td align="center"><b>리뷰 작성</b></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/c249a9a1-e360-4dab-ba85-fe9250c3a5a6" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/93a691f7-216f-41bc-827f-563936b2fc07" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/92ba1b37-e9fc-40c1-a4ca-d0873d371fec" width="100%"/></td>
+  </tr>
+</table>
+
+</br>
+
+### 6-4. 관리자 기능
+
+<table>
+  <tr>
+    <td align="center"><b>어드민 로그인</b></td>
+    <td align="center"><b>어드민 예약 현황</b></td>
+    <td align="center"><b>어드민 리뷰 리스트</b></td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/6d52d24a-19a9-4406-bba0-4b5bf7413581" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/693d9d5b-b7d2-428a-8508-977c30f69b11" width="100%"/></td>
+    <td><img src="https://github.com/user-attachments/assets/acb82c55-3f49-4d8a-99e8-908f0cc395c7" width="100%"/></td>
+  </tr>
+</table>
 
 
 
