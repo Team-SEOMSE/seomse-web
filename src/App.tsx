@@ -7,6 +7,9 @@ import Home from "./pages/home/Home";
 import Splash from "./pages/splash/Splash";
 const Trend = lazy(() => import("./pages/trend/Trend"));
 const AiAnalysis = lazy(() => import("./pages/aiAnalysis/AiAnalysis"));
+const AppliedStylePage = lazy(
+    () => import("./pages/aiAnalysis/AppliedStylePage")
+);
 const Reservation = lazy(() => import("./pages/reservation/Reservation"));
 const KakaoLogin = lazy(() => import("./pages/socialLogin/KakaoLogin"));
 const KakaoCallback = lazy(() => import("./pages/socialLogin/KakaoCallback"));
@@ -115,6 +118,10 @@ const router = createBrowserRouter([
             { path: "trend", element: withSuspense(Trend) },
             { path: "reservation", element: withSuspense(Reservation) },
             { path: "ai-analysis", element: withSuspense(AiAnalysis) },
+            {
+                path: "ai-analysis/result",
+                element: withSuspense(AppliedStylePage),
+            },
             {
                 path: "my-page",
                 element: withSuspense(MyPageShell),
