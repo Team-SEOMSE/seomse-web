@@ -4,7 +4,7 @@ import { FIXED_NOW } from "../fixtures/reservationData";
 /**
  * 일정(날짜/시간) 선택 페이지 (라우트 /select-schedule) Page Object
  *
- * 실제 컴포넌트 기준 (이 브랜치):
+ * 실제 컴포넌트 기준:
  * - src/pages/selectSchedule/SelectSchedule.tsx
  *     → reservationType "normal" 일 때 "다음" 클릭 시
  *       POST /interaction/appointments/normal 을 호출하고 onSuccess 에서만 확정 이동

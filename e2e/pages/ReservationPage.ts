@@ -3,7 +3,7 @@ import type { Locator, Page } from "@playwright/test";
 /**
  * 예약 메인 페이지 (라우트 /reservation) Page Object
  *
- * 실제 컴포넌트 기준 (이 브랜치 = API 의존):
+ * 실제 컴포넌트 기준 (예약 플로우 = API 의존):
  * - src/pages/reservation/Reservation.tsx
  * - 헤어샵 목록: src/components/reservation/ShopList.tsx
  *     → GET /shops?type=HAIR_SALON 결과를 카드로 렌더 (<img alt={shopName}>)

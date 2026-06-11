@@ -3,7 +3,7 @@ import { MOCK_DESIGNERS, MOCK_SHOPS } from "../fixtures/reservationData";
 import type { ShopApiItem } from "../../src/types/reservation/shopList";
 
 /**
- * 예약 플로우 API Mock 핸들러 (이 브랜치는 전 구간 실시간 API 의존).
+ * 예약 플로우 API Mock 핸들러 (예약 플로우는 전 구간 실시간 API 의존).
  *
  * 실제 호출 경로 (src/api/URL.ts + 각 컴포넌트):
  *   GET  /shops?type=HAIR_SALON              (ShopList)

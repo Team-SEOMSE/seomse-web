@@ -1,7 +1,7 @@
 /**
  * 예약 테스트용 Mock 데이터 및 기대값 상수.
  *
- * 이 브랜치(test)의 예약 플로우는 전 구간이 실시간 API 의존이다.
+ * 예약 플로우는 전 구간이 실시간 API에 의존한다.
  *   - GET  /shops?type=HAIR_SALON   (샵 목록)         → ShopList.tsx
  *   - GET  /shops/{shopId}          (샵 상세/디자이너) → ShopList.tsx
  *   - POST /interaction/appointments/normal  (일반 예약 제출) → SelectSchedule.tsx

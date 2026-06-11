@@ -17,7 +17,7 @@ import { authenticate } from "../utils/auth";
 /**
  * 예약 기능 - Network Mocking 기반 QA 자동화
  *
- * [이 브랜치 특성] 예약 플로우는 전 구간이 실시간 API 의존이다.
+ * 예약 플로우는 전 구간이 실시간 API에 의존한다.
  *   - GET  /shops?type=HAIR_SALON            (샵 목록)
  *   - GET  /shops/{shopId}                   (샵 상세/디자이너)
  *   - POST /interaction/appointments/normal  (일반 예약 제출, onSuccess 에서만 확정 이동)
