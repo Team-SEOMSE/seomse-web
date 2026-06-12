@@ -149,4 +149,18 @@ test.describe("예약 기능", () => {
             timeout: 7000,
         });
     });
+
+    test("TC-R07 | [결함] 미래 날짜를 선택해도 현재 시각 이전 슬롯이 노출되지 않는다", async ({
+        schedulePage,
+    }) => {
+        // Known issue: TimeSelect가 선택 날짜 없이 현재 시각 기준으로 슬롯을 필터링한다.
+        // 수정되면 이 테스트는 "expected to fail but passed"로 알려준다.
+        test.fail();
+
+        await schedulePage.freezeClock("2026-06-10T15:00:00");
+        await schedulePage.goto();
+        await schedulePage.selectDate(25);
+
+        await expect(schedulePage.timeOption("11:00")).toBeVisible();
+    });
 });

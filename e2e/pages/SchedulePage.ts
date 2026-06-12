@@ -28,11 +28,20 @@ export class SchedulePage {
     }
 
     /**
-     * 브라우저 시각을 FIXED_NOW 로 고정한다.
+     * 브라우저 시각을 고정한다(기본값 FIXED_NOW = 영업 시작 전).
      * 반드시 첫 페이지 이동 전에 호출해야 첫 렌더부터 결정적인 시간 슬롯이 노출된다.
+     * 특정 시각 검증이 필요한 케이스는 ISO 문자열을 넘겨 덮어쓴다.
      */
-    async freezeClock(): Promise<void> {
-        await this.page.clock.setFixedTime(new Date(FIXED_NOW));
+    async freezeClock(isoTime: string = FIXED_NOW): Promise<void> {
+        await this.page.clock.setFixedTime(new Date(isoTime));
+    }
+
+    /**
+     * 달력에서 특정 '일(day)'을 선택한다.
+     * 현재 달의 12~30일은 이전/다음 달 스필오버(1~11, 31)와 겹치지 않아 exact 텍스트로 고유 식별된다.
+     */
+    async selectDate(day: number): Promise<void> {
+        await this.page.getByText(String(day), { exact: true }).click();
     }
 
     /** 일정 선택 페이지 직접 진입 (state 없이 = normal 기본값) */
